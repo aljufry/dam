@@ -1,0 +1,23 @@
+<% @page_title = "New Device" %>
+
+<div class="pageTitle">
+ <div style="text-align: center"><font color="#191970"><%= "New Device" %></font></div>
+</div>
+
+  <%= form_for(:newdevice, :url => {:action => 'create'}) do |f| %>
+  <% if @newdevice.errors.any? %>
+  
+  <div class="error">
+    <ul>
+      <% @newdevice.errors.full_messages.each do |message| %>
+      <li>
+        <%= message %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <%= render(:partial => "form", :locals => {:f => f}) %>
+  <% end %>
+
+

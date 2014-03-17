@@ -1,0 +1,23 @@
+<% @page_title = "New_IP Address" %>
+
+<div class="pageTitle">
+  <%="new_IP Address"%>
+</div>
+
+<div class="form">
+  <%= form_for(:ip_subnet,  :url => {:action => 'create', :id => @interface.id}) do |f| %>
+      <% if @ip_subnet.errors.any? %>
+
+          <div class="error">
+            <ul>
+              <% @ip_subnet.errors.full_messages.each do |message| %>
+                  <li>
+                    <%= message %>
+                  </li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+      <%= render(:partial => "form", :locals => {:f => f}) %>
+  <% end %>
+</div>

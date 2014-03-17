@@ -1,0 +1,4 @@
+<tr>
+  <td class="caption"><label for="subnet"><%= f.label("Subnet:") %>:</label></td>
+  <td class="data"> <%= f.select(:interface,options_for_select(@interfaces.map{|v| [v.subnet,v.subnet]},:selected =>params[:subnet_id]) )  %> </td>
+</tr>

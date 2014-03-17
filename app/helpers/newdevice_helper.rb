@@ -1,0 +1,2 @@
+module NewdeviceHelper
+end

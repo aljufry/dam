@@ -1,0 +1,23 @@
+<% @page_title  %>
+
+<div class="jumbotron">
+
+  <%= form_for(:subnet, :url => {:action => 'destroy', :id => @subnet.id}) do |f| %>
+
+      <p>
+        <font color="white"> <%= "Are you sure you want to delete" %></font>
+
+        <font color="red"><%= @subnet.name %></font></font>
+          </p>
+
+
+
+          <%= link_to(t("no1"), {:action => 'list'}, :class => "btn btn-success") %>
+          <button type="submit" class="btn btn-danger"><%= "Yes" %></button>
+
+
+
+      <%end%>
+  </div>
+
+

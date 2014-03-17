@@ -1,0 +1,24 @@
+<% @page_title %>
+
+<div style="text-align: center"><font size = 3 color="#191970">
+  <%="Edit"%><%= @subnet.name %></font>
+</div>
+
+<div class="table table-hover">
+  <%= form_for(:subnet, :url => {:action => 'update', :id => @subnet.id}) do |f| %>
+  <% if @subnet.errors.any? %>
+  
+  <div class="error">
+    <ul>
+      <% @subnet.errors.full_messages.each do |message| %>
+      <li>
+        <%= message %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <%= render(:partial => "form", :locals => {:f => f}) %>
+  <% end %>
+
+</div>

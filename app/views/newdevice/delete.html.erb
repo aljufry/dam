@@ -1,0 +1,14 @@
+<% @page_title = "Delete Device" %>
+
+<div class="jumbotron">
+  <%= form_for(:newdevice, :url => {:action => 'destroy', :id => @newdevice.id}) do |f| %>
+    <p>
+      <font color="white"> <%= "Are you sure you want to delete" %></font>
+      <font color="red"> <%= @newdevice.device_type %></font>
+      </p>
+      <%= link_to(t("no1"), {:action => 'list'}, :class => "btn btn-success") %>
+      <button type="submit"class="btn btn-danger"> <%="Yes" %></button>
+  <% end %>
+</div>
+
+

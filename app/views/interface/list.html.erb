@@ -1,0 +1,53 @@
+<% @page_title = @device.device_name  ,"::" , "Interface" %>
+
+<% if @device != nil %>
+    <div class="pageTitle">
+      <%= "Interfaces" %> <%= "of" %> <%= @device.device_type %> <%= "("%> <%=@device.device_name %> <%=")" %>
+    </div>
+    <div class="second_links">
+      <%= link_to(t(:New_Interface), {:action => 'new', :id => @device.id}, :class => 'btn btn-primery')%>
+    </div>
+    <div class="grid">
+      <table class="table">
+        <tr>
+          <td class="title">#</td>
+          <td class="title"><%= "Physical Label" %></td>
+          <td class="title"><%= "Interface" %></td>
+          <td class="title"><%= "IP Address" %></td>
+          <td class="title"><%= t :update_at %></td>
+          <td class="title"><%= t :create_by %></td>
+          <td class="title"><%= t :actions %></td>
+        </tr>
+        <% index = 0 %>
+        <% @interfaces.each do |interface| %>
+            <% index += 1 %>
+            <% class_name = index % 2 == 0 ? 'even' : 'odd' %>
+            <tr class='<%= class_name %>'>
+              <td class="index"><%= index %></td>
+              <td><%= interface.physical_label %></td>
+              <td><%= interface.interface_name%></td>
+              <td><%= interface.created_at.to_s(:short) %></td>
+              <td><%= interface.updated_at.to_s(:short) %></td>
+              <td><%= interface.author.name.length > 0 ? interface.author.name : interface.author.username %></td>
+              <td class="actions">
+                <%= link_to("IP",{:controller => 'ip_subnet', :action => 'list', :id => interface.id})%>
+                |
+                <%= link_to("show", {:action => 'show', :id => interface.id}) %>
+                |
+                <%= link_to(t(:edit), {:action => 'edit', :id => interface.id}) %>
+                |
+                <%= link_to(t(:delete), {:action => 'delete', :id => interface.id}) %>
+            </td>
+            </tr>
+        <% end %>
+        <tr>
+          <td colspan="8" class="pagination"> <%= will_paginate @interfaces, :previous_label => t(:previous), :next_label => t(:next) %> </td>
+        </tr>
+      </table>
+      <div class="Third_links">
+        <br>
+        <%= link_to(t("Back"), {:controller => 'device',:action => 'list', :id => @device.subnet.id}, :class => "button") %>
+      </div>
+    </div>
+
+<% end %>

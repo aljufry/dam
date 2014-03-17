@@ -1,0 +1,33 @@
+<h1>New agent</h1>
+
+
+<table class="table table-hover">
+    <tr>
+    <td class="caption"><label for="name"><%= f.label("IP Address") %>:</label></td>
+    <td class="data"> <%= f.text_field(:ip_address, :maxlength => 20, :size => 30)  %> </td>
+    </tr>
+    <tr>
+    <td class="caption"><label for="name"><%= f.label("Name") %>:</label></td>
+    <td class="data"> <%= f.text_field(:name, :maxlength => 20, :size => 30)  %> </td>
+    </tr>
+    <tr>
+    <td class="caption"><label for="name"><%= f.label("community") %>:</label></td>
+    <td class="data"> <%= f.text_field(:community, :maxlength => 20, :size => 30)  %> </td>
+    </tr>
+    <tr>
+    <td class="caption"><label for="name"><%= f.label("Mib") %>:</label></td>
+    <td class="data"> <%= f.text_area(:mibs, :rows=>"10" , :cols=>"30")  %> </td>
+    </tr>
+  </tr>
+
+  <tr>
+    <td class="buttons" colspan="2">
+      <button type="submit"class="btn btn-success"><%="Save" %></button>
+      <%= link_to(t("Cancel"), {:action => 'index'},:class => "btn btn-danger") %>
+    </td>
+  </tr>
+</table>
+
+
+
+<%= link_to 'Back', :ccontroller=>'dashboard',:action=>'index' %>

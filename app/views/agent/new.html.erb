@@ -1,0 +1,24 @@
+<% @page_title = t(:new_agent) %>
+
+<div class="pageTitle">
+  <div style="text-align: center"><font color="#191970"><%= "New Agent" %></font></div>
+</div>
+
+
+<%= form_for(:agent, :url => {:action => 'create'}) do |f| %>
+    <% if @agent.errors.any? %>
+
+        <div class="error">
+          <ul>
+            <% @agent.errors.full_messages.each do |message| %>
+                <li>
+                  <%= message %>
+                </li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <%= render(:partial => "form", :locals => {:f => f}) %>
+<% end %>
+
+

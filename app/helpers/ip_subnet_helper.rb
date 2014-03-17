@@ -1,0 +1,2 @@
+module IpSubnetHelper
+end

@@ -1,0 +1,19 @@
+<% @page_title = t(:delete_user) %>
+
+<div class="jumbotron">
+
+  <%= form_for(:user, :url => {:action => 'destroy', :id => @user.id}) do |f| %>
+
+        <p>
+          <font color="white"> <%= "Are you sure you want to delete" %></font>
+
+          <font color="red"> <b><%= @user.name %><font color=white><%="user as"%></font>
+            <font color=red><%= @user.username %></font></b></font>
+        </p>
+
+      <%= link_to(t("no1"), {:action => 'list'}, :class => "btn btn-success") %>
+      <button type="submit" class="btn btn-danger"><%= "Yes" %></button>
+
+
+  <% end %>
+</div>

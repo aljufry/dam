@@ -1,0 +1,23 @@
+<% @page_title = "Edit Device" %>
+
+<div class="pageTitle">
+  <%= "Edit Device" %>
+</div>
+
+  <%= form_for(:newdevice, :url => {:action => 'update', :id => @newdevice.id}) do |f| %>
+      <% if @newdevice.errors.any? %>
+
+          <div class="error">
+            <ul>
+              <% @newdevice.errors.full_messages.each do |message| %>
+                  <li>
+                    <%= message %>
+                  </li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+      <%= render(:partial => "form", :locals => {:f => f}) %>
+  <% end %>
+
+

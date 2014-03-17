@@ -1,0 +1,69 @@
+<table class="table table-hover">
+  <tr>
+    <td class="caption"><label for="name"><%= f.label("Type") %>:</label></td>
+    <td class="data"> <%= f.text_field(:device_type, :maxlength => 255, :size => 30, :placeholder=>'Ex: Server')  %> </td>
+  </tr>
+
+  <tr>
+    <td class="col-md-2"><label for="name"><%= f.label("Device name") %>:</label></td>
+    <td class="col-md-2"> <%= f.check_box(:device_name,  :vis=>'true')  %> </td>
+
+    <td class="col-md-2"><label for="name"><%= f.label("Host name") %>:</label></td>
+    <td class="col-md-2"> <%= f.check_box(:host_name,  :vis=>'true')  %> </td>
+  </tr>
+  <tr>
+    <td class="caption"><label for="name"><%= f.label("Platform") %>:</label></td>
+    <td class="data"> <%= f.check_box(:platform,  :vis=>'true')  %> </td>
+
+    <td class="caption"><label for="name"><%= f.label("mode") %>:</label></td>
+    <td class="data"> <%= f.check_box(:model, :size => 30)  %> </td>
+  </tr>
+  <tr>
+    <td class="caption"><label for="name"><%= f.label("operating_system") %>:</label></td>
+    <td class="data"> <%= f.check_box(:operating_system, :size => 30)  %> </td>
+
+    <td class="caption"><label for="name"><%= f.label("serial_number") %>:</label></td>
+    <td class="data"> <%= f.check_box(:serial_number,  :size => 30)  %> </td>
+  </tr>
+  <tr>
+    <td class="caption"><label for="name"><%= f.label("warranty") %>:</label></td>
+    <td class="data"> <%= f.check_box(:warranty, :prompt => { :day => t(:day), :month => t(:month), :year => t(:year) })  %> </td>
+
+    <td class="caption"><label for="name"><%= f.label("location") %>:</label></td>
+    <td class="data"> <%= f.check_box(:location, :size => 30)  %> </td>
+  </tr>
+  <tr>
+    <td class="caption"><label for="name"><%= f.label("segment") %>:</label></td>
+    <td class="data"> <%= f.check_box(:segment, :size => 30)  %> </td>
+
+    <td class="caption"><label for="name"><%= f.label("application") %>:</label></td>
+    <td class="data"> <%= f.check_box(:application,  :size => 30)  %> </td>
+  </tr>
+  <tr>
+    <td class="caption"><label for="name"><%= f.label("username") %>:</label></td>
+    <td class="data"> <%= f.check_box(:username, :size => 30)  %> </td>
+
+    <td class="caption"><label for="name"><%= f.label("password") %>:</label></td>
+    <td class="data"> <%= f.check_box(:password, :size => 30)  %> </td>
+  </tr>
+  <tr>
+    <td class="titel"><label for="name"><%= f.label("remarks") %>:</label></td>
+    <td class="data"> <%= f.check_box(:remarks,  :cols => 50, :rows => 10)  %> </td>
+
+    <td class="buttons" colspan="2">
+      <%= link_to(t("List"), {:action => 'list'}, :class => "btn btn-info") %>
+     <button type="submit"class="btn btn-success"> <%= "Save" %></button>
+      <% if @newdevice.id %>
+          <br/><br/><br/>
+          <!--<%= link_to(t("delete"), {:action => 'delete'}, :class => "button") %>-->
+          <!--<%= link_to(t("show"), {:action => 'show'}, :class => "button") %>-->
+      <% end %>
+    </td>
+  </tr>
+</table>
+<script type="text/javascript">
+    var input = $("#newdevice_device_name");
+    if (input != null && input != undefined) {
+        input.focus();
+    }
+</script>

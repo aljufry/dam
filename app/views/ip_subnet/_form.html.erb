@@ -1,0 +1,28 @@
+<table class="form">
+  <tr>
+    <td class="caption"><label for="name"><%= f.label("IP") %>:</label></td>
+    <td class="data"> <%= f.text_field(:ip, :maxlength => 100, :size => 30)  %> </td>
+  </tr>
+  <tr>
+    <td class="caption"><label for="name"><%= f.label("Subnet") %>:</label></td>
+    <td class="data"> <%= f.text_field(:subnet, :maxlength => 100, :size => 30)  %> </td>
+  </tr>
+  <tr>
+    <td class="caption"><label for="name"><%= f.label("Description") %>:</label></td>
+    <td class="data"> <%= f.text_field(:remarks, :maxlength => 255, :size => 30)  %> </td>
+  </tr>
+  <tr>
+    <td class="buttons" colspan="2">
+      <%= link_to(t("list"), {:controller => "ip_subnet",:action => 'list', :id => @interface.id}, :class => "button") %>
+      <%= submit_tag(t(:save)) %>
+      <% if @ip_subnet.id %>
+      <% end %>
+    </td>
+  </tr>
+</table>
+<script type="text/javascript">
+    var input = $("#server_server_name");
+    if (input != null && input != undefined) {
+        input.focus();
+    }
+</script>

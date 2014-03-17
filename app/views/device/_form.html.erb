@@ -1,0 +1,16 @@
+<table class="table">
+
+
+  <tr>
+    <td class="caption"><label for="name"><%= f.label("Device Type:") %>:</label></td>
+    <td class="data"> <%= f.select(:device_type, options_for_select(newdevices.map{|v| [v.device_type,v.id]}))  %> </td>
+  </tr>
+
+
+</table>
+<script type="text/javascript">
+    var input = $("#device_device_name");
+    if (input != null && input != undefined) {
+        input.focus();
+    }
+</script>

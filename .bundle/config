@@ -1,0 +1,2 @@
+---
+BUNDLE_BUILD__MYSQL2: --with-opt-dir=c:\mysql-connector-c-noinstall-6.0.2-win32

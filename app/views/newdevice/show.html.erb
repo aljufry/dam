@@ -1,0 +1,163 @@
+<% @page_title = "Device" %>
+
+
+  <table class="table table-hover">
+    <tr>
+      <td class="alert-success">
+        <%=" Type of Device " %><font color=red><%= @newdevice.device_type %></font>
+      </td>
+</tr>
+      <td class="title">
+        <%if  @newdevice.device_name !=0 %>
+            <img src="/assets/Check-yes.gif" />
+        <%else%>
+            <img src="/assets/check-no.gif" />
+        <%end%>
+        <%=" Host Name" %>
+     </td>
+        <td>
+        <%if  @newdevice.model !=false %>
+            <img src="/assets/Check-yes.gif" />
+        <%else%>
+            <img src="/assets/check-no.gif" />
+            <%end%><%=" Platform" %>
+      </td>
+
+
+      <td class="title">
+     <%if  @newdevice.operating_system !=false %>
+            <img src="/assets/Check-yes.gif" />
+        <%else%>
+            <img src="/assets/check-no.gif" />
+            <%end%><%=" Operation System" %>
+
+      </td>
+
+      <td class="title">
+      <%if  @newdevice.serial_number !=false %>
+            <img src="/assets/Check-yes.gif" />
+        <%else%>
+            <img src="/assets/check-no.gif" />
+            <%end%><%=" Serial Number" %>
+
+      </td>
+    </tr>
+    <tr>
+      <td class="title">
+      <%if  @newdevice.warranty !=false %>
+            <img src="/assets/Check-yes.gif" />
+        <%else%>
+            <img src="/assets/check-no.gif" />
+            <%end%><%=" Warranty" %>
+
+      </td>
+
+      <td class="title">
+      <%if  @newdevice.location !=false %>
+            <img src="/assets/Check-yes.gif" />
+        <%else%>
+            <img src="/assets/check-no.gif" />
+            <%end%><%=" Location" %>
+
+      </td>
+
+      <td class="title">
+      <%if  @newdevice.segment !=false %>
+            <img src="/assets/Check-yes.gif" />
+        <%else%>
+            <img src="/assets/check-no.gif" />
+            <%end%><%=" Segment" %>
+
+      </td>
+
+      <td class="title">
+     <%if  @newdevice.application !=false %>
+            <img src="/assets/Check-yes.gif" />
+        <%else%>
+            <img src="/assets/check-no.gif" />
+            <%end%><%=" Application" %>
+
+      </td>
+    </tr>
+    <tr>
+      <td class="title">
+     <%if  @newdevice.username !=false %>
+            <img src="/assets/Check-yes.gif" />
+        <%else%>
+            <img src="/assets/check-no.gif" />
+            <%end%><%=" User Name" %>
+
+      </td>
+
+      <td class="title">
+     <%if  @newdevice.password !=false %>
+            <img src="/assets/Check-yes.gif" />
+        <%else%>
+            <img src="/assets/check-no.gif" />
+            <%end%><%=" Password" %>
+
+      </td>
+
+      <td class="title">
+     <%if  @newdevice.remarks !=false %>
+            <img src="/assets/Check-yes.gif" />
+        <%else%>
+            <img src="/assets/check-no.gif" />
+            <%end%><%="Device Name" %>
+
+      </td>
+    </tr>
+    <tr>
+      <td class="title"><%= "Create at  " %>:</td>
+      <td><%= @newdevice.created_at.to_s(:long) %></td>
+    </tr>
+    <tr>
+      <td class="title"><%= "Update at  " %>:</td>
+      <td><%= @newdevice.updated_at.to_s(:long) %></td>
+    </tr>
+    <tr>
+      <td class="title"><%= "Create by "%>:</td>
+      <td><%= @newdevice.author.name.length > 0 ? @newdevice.author.name : @newdevice.author.username %></td>
+    </tr>
+    </table>
+  </br>
+    <tr>
+      <td class="buttons" colspan="2">
+        <%= link_to(t("List"), {:action => 'list'}, :class => "btn btn-info") %>
+        <%= link_to(t("edit"), {:action => 'edit', :id => @newdevice.id}, :class => "btn btn-warning") %>
+        <%= link_to(t("delete"), {:action => 'delete', :id => @newdevice.id}, {:class => "btn-delete btn btn-danger"}) %>
+      </td>
+    </tr>
+
+  </table>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Delete type of device</h4>
+      </div>
+      <div class="modal-body">
+
+      </div>
+      <div class="modal-footer">
+        <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+        <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    $(function(){
+        $('.btn-delete').click(function(e){
+
+            $('#myModal').modal('show');
+            $('#myModal .modal-body').load($(this).attr("href")+"?nolayout=1");
+            e.preventDefault();
+        });
+
+
+    });
+</script>
+

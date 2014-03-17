@@ -1,0 +1,18 @@
+<h1>Dashboard</h1>
+
+<p>
+  <%= link_to "Add Agent", :controller=>'agent' %> [ <%= link_to 'Down', :url => {:action => 'show_down'} %> |
+  <%= link_to 'Favorites', :url => {:action => 'show_favorites'} %> |
+  <%= link_to 'All', :url => {:action => 'show_all'} %> |
+  <%= link_to 'show', :url => {:action => 'show'} %>]
+</p>
+
+
+
+<div id="agents_table">
+  <%= render :partial => 'agents_table', :object => Agent.down %>
+</div>
+
+<%= link_to ("Agent Add" ),:controller=>'agent',:action=>'new'%>
+|
+<%= link_to ("Show" ),:controller=>'agent',:action=>'show'%>

@@ -1,0 +1,128 @@
+
+  <table class="table table-hover">
+    <tr>
+      <td>
+      <td>
+    </tr>
+    <tr>
+      <td class="title"><font color="orange"><%= "Device Type" %></font></td>
+      <td><%= @device.device_type%></td>
+    </tr>
+    <tr>
+      <td class="title"><font color="orange"><%= "Device Name" %></font></td>
+      <td><%= @device.device_name%></td>
+    </tr>
+    <%if @devicetype.model%>
+        <tr>
+          <td class="title"><font color="orange"><%= t :model %></font></td>
+          <td><%= @device.model %></td>
+        </tr>
+    <%end%>
+    <%if @devicetype.serial_number%>
+        <tr>
+          <td class="title"><font color="orange"><%= t :serial_number %></font></td>
+          <td><%= @device.serial_number %></td>
+        </tr>
+    <%end%>
+    <%if  @devicetype.operating_system%>
+        <tr>
+          <td class="title"><font color="orange"><%= t :operating_system %></font></td>
+          <td><%= @device.operating_system %></td>
+        </tr>
+    <%end%>
+    <%if  @devicetype.username%>
+        <tr>
+          <td class="title"><font color="orange"><%= t :username %></font></td>
+          <td><%= @device.username %></td>
+        </tr>
+    <%end%>
+    <%if  @devicetype.password%>
+        <tr>
+          <td class="title"><font color="orange"><%= t :password %></font></td>
+          <td><span id="password"><%= @device.password %></span></td>
+        </tr>
+        <tr>
+    <%end%>
+    <%if  @devicetype.warranty%>
+        <td class="title"><font color="orange"><%= t :warranty %></font></td>
+        <td><%= @device.warranty != nil ? @device.warranty.to_s(:long) : '' %></td>
+        </tr>
+    <%end%>
+    <%if  @devicetype.location%>
+        <tr>
+          <td class="title"><font color="orange"><%= t :location %></font></td>
+          <td><%= @device.location %></td>
+        </tr>
+    <%end%>
+    <%if  @devicetype.segment%>
+        <tr>
+          <td class="title"><font color="orange"><%= t :segment %></font></td>
+          <td><%= @device.segment %></td>
+        </tr>
+    <%end%>
+    <%if @devicetype.application%>
+        <tr>
+          <td class="title"><font color="orange"><%= t :application %></font></td>
+          <td><%= @device.application %></td>
+        </tr>
+    <%end%>
+    <%if @devicetype.remarks%>
+        <tr>
+          <td class="title"><font color="orange"><%= t :remarks %></font></td>
+          <td><%= @device.remarks %></td>
+        </tr>
+    <%end%>
+    <tr>
+      <td class="title"><font color="orange"><%= t :create_at %></font></td>
+      <td><%= @device.created_at.to_s(:long) %></td>
+    </tr>
+    <tr>
+      <td class="title"><font color="orange"><%= t :update_at %></font></td>
+      <td><%= @device.updated_at.to_s(:long) %></td>
+    </tr>
+    <tr>
+      <td class="title"><font color="orange"><%= t :create_by %></font></td>
+      <td><%= @device.author.name.length > 0 ? @device.author.name : @device.author.username %></td>
+    </tr>
+    <%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype != "End_user" %>
+        <tr>
+          <td class="buttons" colspan="2">
+            <%= link_to(t("list"), {:action => 'list', :id => @device.subnet.id}, :class => "btn btn-info") %>
+            <%= link_to(t("edit"), {:action => 'edit', :id => @device.id}, :class => "btn btn-warning") %>
+
+          </td>
+        </tr>
+    <%end%>
+  </table>
+
+
+
+  <script type="text/javascript">
+
+      $(document).ready(function() {
+          try {
+              $('span#password').css('background-color', 'black');
+              $('span#password').css('border-radius', '3px');
+              $('span#password').css('cursor', 'default');
+
+              $('span#password').mouseenter(function() {
+                  $('span#password').css('background-color', 'transparent');
+              });
+
+              $('span#password').mouseout(function() {
+                  setTimeout("$('span#password').css('background-color', 'black');", 1000);
+              });
+          } catch (e) {
+              console.log(e);
+          }
+      });
+
+
+  </script>
+
+<%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype == "End_user" %>
+    <div class="Third_links">
+      <br>
+      <%= link_to("Back",{:controller => 'subnets', :action => 'view_user'},:class=>"btn btn-info")%>
+    </div>
+<%end%>

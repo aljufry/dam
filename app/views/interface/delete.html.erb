@@ -1,0 +1,15 @@
+<% @page_title = "Delete Interface" %>
+
+<div class="jumbotron">
+  <%= form_for(:interface, :url => {:action => 'destroy', :id => @interface.id}) do |f| %>
+
+      <p >
+        <font color="white"> <%= "Are you sure you want to delete" %></font>
+        <font color="red"><%= @interface.interface_name %></font>
+        <font color="white"><%="interface"%></font>
+      </p>
+      <%= link_to("NO", {:controller=>'device',:action => 'list', :id=>@device.subnet.id}, :class => "btn btn-success") %>
+     <button type="submit" class="btn btn-danger"> <%= "Yes" %></button>
+  <% end %>
+</div>
+

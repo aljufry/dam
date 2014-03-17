@@ -1,0 +1,55 @@
+<% @page_title = @server.server_name + "::" + "connection" %>
+
+<% if @server != nil %>
+<div class="pageTitle">
+  <%= "Connections" %> <%= "of" %> <%= @server.server_name %>
+</div>
+<div class="second_links">
+  <%= link_to(t(:new_connection), :action => 'new', :id => @server.id)%>
+</div>
+<div class="grid">
+  <table class="grid" cellspacing="4">
+    <tr>
+      <td class="title"></td>
+      <td class="title"><%= "Device_name" %></td>
+      <td class="title"><%= t :ip %></td>
+
+      <td class="title"><%= t :model %></td>
+
+      <td class="title"><%= t :create_at %></td>
+      <td class="title"><%= t :update_at %></td>
+      <td class="title"><%= t :create_by %></td>
+      <td class="title"><%= t :actions %></td>
+    </tr>
+    <% index = 0 %>
+    <% @connections.each do |connection| %>
+    <% index += 1 %>
+    <% class_name = index % 2 == 0 ? 'even' : 'odd' %>
+    <tr class='<%= class_name %>'>
+      <td class="index"><%= index %></td>
+      <td><%= connection.device_name %></td>
+      <td><%= connection.ip %></td>
+      <td><%= connection.model%></td>
+      <td><%= connection.created_at.to_s(:short) %></td>
+      <td><%= connection.updated_at.to_s(:short) %></td>
+      <td><%= connection.author.name.length > 0 ? connection.author.name : connection.author.username %></td>
+      <td class="actions">
+      <%= link_to("show", {:action => 'show', :id => connection.id}) %>
+      |
+      <%= link_to(t(:edit), {:action => 'edit', :id => connection.id}) %>
+      |
+      <%= link_to(t(:delete), {:action => 'delete', :id => connection.id}) %>
+
+
+      </td>
+
+
+
+    </tr>
+    <% end %>
+    <tr>
+      <td colspan="8" class="pagination"> <%= will_paginate @connection, :previous_label => t(:previous), :next_label => t(:next) %> </td>
+    </tr>
+  </table>
+</div>
+<% end %>

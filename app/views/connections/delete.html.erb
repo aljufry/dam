@@ -1,0 +1,15 @@
+<% @page_title = "Delete Connection" %>
+
+<div class="form">
+  <%= form_for(:connection, :url => {:action => 'destroy', :id => @connection.id}) do |f| %>
+  
+    <%= t :sure_to_delete_Connection %>
+  
+  <p>
+    <%= t :connection %>: <b><%= @connection.device_name %></b>
+  </p>
+
+  <%= link_to(t("no1"), {:action => 'list'}, :class => "button") %>
+  <%= submit_tag(t(:yes1)) %>
+  <% end %>
+</div>

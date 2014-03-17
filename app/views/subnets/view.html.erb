@@ -1,0 +1,105 @@
+<% @page_title = "Overall View" %>
+<div class="pageTitle" xmlns="http://www.w3.org/1999/html">
+  <%= "Overall View" %> <%= t :of %> <%= "The Network " %>
+</div>
+<p style="color: black">
+  <% index = 0 %>
+  <% @subnets.each do |subnet| %>
+    <UL class="network_tree" >
+
+      <LI><% if subnet.entries.size !=0 %>
+
+
+            <img src="/assets/expand.gif" alt="Click to expand!"/> <%end%><span>
+
+        <% index += 1 %>
+
+        <%= index %><%= "-" %>
+        <%= subnet.name %>
+        <%= "[" %>
+        <%= link_to(subnet.cidr, {:action => 'show', :id => subnet.id}) %><%= "]" %></span>
+        <!--</br>-->
+
+        <UL>
+          <% subnet.entries.each do |device| %>
+              <LI><% if device.interfaces.size !=0 %><img src="/assets/expand.gif" alt="Click to expand!"/> <%end%><span>
+                <%= link_to(device.device_name, {:controller => "device",:action => 'show', :id => device.id}) %>
+                <span style="color: #000d11;font-size: 10">(<%= device.device_type %>)</span> </span>
+                <UL>
+                  <LI>
+                <span>
+                      <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+                      <table class="table table-hover">
+                        <tr class="alert-info">
+                          <td class="alert-success">#</td>
+                          <td class="title"><%= "Physical Label" %></td>
+                          <td class="title"><%= "Name" %></td>
+                          <td class="title"><%= "IP Address" %></td>
+                          <td class="title"><%= "Net Mask" %></td>
+                          <td class="title"><%= "DNS" %></td>
+                          <td class="title"><%= "HW Address" %></td>
+
+                        </tr>
+                        <% index_interface= 0 %>
+                        <% device.interfaces.each do |interface| %>
+                            <% index_interface += 1 %>
+                            <% class_name = index_interface % 2 == 0 ? 'even' : 'odd' %>
+                            <tr>
+                              <td class="alert-success"><%= index_interface %></td>
+                              <td ><%=interface.physical_label%></td>
+                              <td><%= interface.interface_name%></td>
+                              <td><%= interface.ip_add%></td>
+                              <td><%= interface.net_mask %></td>
+                              <td><%= interface.dns%></td>
+                              <td><%= interface.hw_add%></td>
+                            </tr>
+                        <% end %>
+                      </table>
+                      <br/>
+
+                </span>
+                  </LI>
+                </UL>
+                <!--</br>-->
+          <%end%>
+          </LI>
+        </UL>
+      </LI>
+
+    </UL>
+
+<%end%>
+</p>
+<script type="text/javascript">
+    $(function(){
+        $('.network_tree').find('span, img').click(function(e){
+
+            $(this).parent().children("ul").slideToggle();
+            if ($(this).parent().children().attr('src')=="/assets/expand.gif")
+            {
+                $(this).parent().children().attr('src',"/assets/collapse.gif");
+            }
+            else
+            {
+                $(this).parent().children().attr('src',"/assets/expand.gif")
+            }
+
+        });
+        $('.network_tree').find('ul').find('ul').slideUp();
+        $('.network_tree').find('ul').slideUp();
+
+    });
+</script>
+
+<%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype == "End_user" %>
+    <div class="Third_links">
+      <br>
+      <%= link_to("Back",{:controller => 'subnets', :action => 'view_user'},:class=>"button")%>
+    </div>
+<%end%>
+</div>
+
+
+
+
+

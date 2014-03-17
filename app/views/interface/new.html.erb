@@ -1,0 +1,22 @@
+<% @page_title = "new_interface" %>
+
+<div class="pageTitle">
+ <div style="text-align: center"><font color="#191970">
+  <%= "New Interfaces" %> <%= "of" %> <%= @device.device_type %> <%= "("%> <%=@device.device_name %> <%=")" %>
+ </font></div>
+</div>
+
+  <%= form_for(:interface,  :url => {:action => 'create', :id => @device.id}) do |f| %>
+      <% if @interface.errors.any? %>
+          <div class="error">
+            <ul>
+              <% @interface.errors.full_messages.each do |message| %>
+                  <li>
+                    <%= message %>
+                  </li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+      <%= render(:partial => "form", :locals => {:f => f}) %>
+  <% end %>

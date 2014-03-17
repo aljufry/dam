@@ -1,0 +1,23 @@
+<% @page_title = "new_connection" %>
+
+<div class="pageTitle">
+  <%="new_connection"%>
+</div>
+
+<div class="form">
+  <%= form_for(:connection, :url => {:action => 'create', :id => @server.id}) do |f| %>
+  <% if @connection.errors.any? %>
+  
+  <div class="error">
+    <ul>
+      <% @connection.errors.full_messages.each do |message| %>
+      <li>
+        <%= message %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <%= render(:partial => "form", :locals => {:f => f}) %>
+  <% end %>
+</div>

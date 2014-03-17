@@ -1,0 +1,20 @@
+<h1>Listing agents</h1>
+<p>Monitoring</p>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Ip address</th>
+  </tr>
+      <% @agents.each do |agent| %>
+      <tr>
+        <td><%=h agent.name %></td>
+        <td><%=h agent.ip_address %></td>
+        <td><%= link_to 'Show', agent %></td>
+      </tr>
+  <% end %>
+</table>
+
+
+
+
+<%= link_to 'Dashboard', :controller=>'Dashboard',:action=>'index'%>

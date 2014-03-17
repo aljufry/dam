@@ -1,0 +1,163 @@
+<% @page_title = @subnet.name%>
+<% if @subnet != nil %>
+    <div class="pageTitle">
+      <p style="text-align: center"><font color="#191970">
+      <%= "Devices" %> <%= t :of %> <%= @subnet.name %></font>
+      </p>
+    </div>
+    <%= link_to(t("Add Device"), {:action => 'new', :id => @subnet.id}, :type=>"button", :class=>"btn btn-primary") %>
+
+    <!--<div class="table table-hover" >-->
+      <table class="table table-hover" >
+
+          <th class="title"><%= "#" %></th>
+          <th class="title"><%= "Type" %></th>
+          <th class="title"><%= "Device Name" %></th>
+          <th class="title" style="text-align: center"><%= "Interface" %></th>
+          <th class="title"><%= t :update_at %></th>
+          <th class="title"><%= t :create_by %></th>
+          <th class="title"><%= "Action" %></th>
+
+        <tr>
+        </tr>
+        <% index = 0 %>
+
+        <% @devices.each do |device| %>
+            <% index += 1 %>
+            <% class_name = index % 2 == 0 ? 'even' : 'odd' %>
+            <tr class='<%= class_name %>'>
+              <td class="index"><%= index %></td>
+              <td><%= device.device_type %></td>
+              <td><%= device.device_name %></td>
+              <!--"********************************"-->
+              <td>
+                <UL class="network_tree" >
+                  <LI><% if device.interfaces.size !=0 %>
+                        <img src="/assets/expand.gif" alt="Click to expand!"/> <%end%><span>
+                    <%= "      Included   ("%>
+                    <FONT COLOR="#ff4500"><%=device.interfaces.size%></FONT> <%=")  Interface"%>
+                    </span>
+                    <UL>
+                      </br>
+                      <%= link_to("Add",{:controller => 'interface', :action => 'new', :id => device.id},:type=>"button", :class=>"btn-delete btn btn-primary")%>
+                        </br></br>
+                      <LI>
+                        <span>
+
+                             <table class="table table-hover">
+                               <tr class="alert-info">
+                                 <td class="alert-success">#</td>
+                                 <td class="title"><%= "Physical Label" %></td>
+                                 <td style="min-width: 100px"class="title"><%= "Name" %></td>
+                                 <td class="title"><%= "IP Address" %></td>
+                                 <td class="title"><%= "Net Mask" %></td>
+                                 <td class="title"><%= "DNS" %></td>
+                                 <td class="title"><%= "MAC.Address" %></td>
+                                 <td style="min-width: 100px" class="alert-danger"><%="Actions" %></td>
+                               </tr>
+                               <% index_interface= 0 %>
+                               <% device.interfaces.each do |interface| %>
+                                   <% index_interface += 1 %>
+                                   <% class_name = index_interface % 2 == 0 ? 'even' : 'odd' %>
+                                   <tr>
+                                     <td class="alert-success"><%= index_interface %></td>
+                                     <td ><%=interface.physical_label%></td>
+                                     <td><%= interface.interface_name%></td>
+                                     <td><%= interface.ip_add%></td>
+                                     <td><%= interface.net_mask %></td>
+                                     <td><%= interface.dns%></td>
+                                     <td><%= interface.hw_add%></td>
+                                     <td class="alert-danger">
+                                       <%= link_to image_tag("/assets/edit.png",:border=>0,:width => 20, :height => 20), {:controller => 'interface',:action => 'edit', :id => interface.id},{:class=>'btn-delete'}%>
+                                       <%= link_to image_tag("/assets/delete2.png",:border=>0,:width => 20, :height => 20), {:controller => 'interface',:action => 'delete', :id => interface.id}, {:class=> 'btn-delete'}%>
+                                       <%= link_to(t("info"),{:controller => 'interface',:action => 'show', :id => interface.id}, {:class=> 'btn-delete'}) %>
+
+
+                                     </td>
+                                   </tr>
+                               <% end %>
+                             </table>
+
+                              </span>
+                      </LI>
+                    </UL>
+                  </LI>
+                </UL>
+              </td>
+              <!--"********************************"-->
+              <td><%= device.updated_at.to_s(:short) %></td>
+              <td><%= device.author.name.length > 0 ? device.author.name : device.author.username %></td>
+              <td>
+                <body link=RED>
+              <%= link_to(t(:show), {:action => 'show', :id => device.id}) %>
+              |
+              <%= link_to("Delete", {:action => 'delete', :id => device.id}, {:class=> 'btn-delete'}) %>
+
+              |
+              <%= link_to(t(:edit), {:action => 'edit', :id => device.id}) %>
+                 </body>
+              </td>
+            </tr>
+        <% end %>
+
+      </table>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <h4 class="modal-title" id="myModalLabel"></h4>
+          </div>
+          <div class="modal-body">
+
+          </div>
+          <div class="modal-footer">
+            <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+            <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+      <tr>
+        <td colspan="8" class="pagination"> <%= will_paginate @devices, :previous_label => t(:previous), :next_label => t(:next) %> </td>
+      </tr>
+
+
+<% end %>
+
+<script>
+    $(function(){
+        $('.btn-delete').click(function(e){
+            debugger;
+            $('#myModal').modal('show');
+            $('#myModal .modal-body').load($(this).attr("href")+"?nolayout=1");
+            e.preventDefault();
+        });
+
+
+    });
+</script>
+
+<script type="text/javascript">
+    $(function(){
+        $('.network_tree').find('span, img').click(function(e){
+            $(this).parent().children("ul").slideToggle();
+            if ($(this).parent().children().attr('src')=="/assets/expand.gif")
+            {
+                $(this).parent().children().attr('src',"/assets/collapse.gif");
+            }
+            else
+            {
+                $(this).parent().children().attr('src',"/assets/expand.gif")
+            }
+        });
+        $('.network_tree').find('ul').find('ul').slideUp();
+        $('.network_tree').find('ul').slideUp();
+    });
+</script>
+
+
+

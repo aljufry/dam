@@ -1,0 +1,51 @@
+<% @page_title = "New Device" %>
+
+<div class="pageTitle">
+  <font color=red><%= "New Device" %></font>
+
+</div>
+
+
+
+  <% if @device.errors.any? %>
+
+  <div class="error">
+    <ul>
+      <% @device.errors.full_messages.each do |message| %>
+      <li>
+        <%= message %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <div id="update_region">
+
+  </div>
+
+<script>
+
+    $(function()
+    {
+    	
+
+        $("#update_region").load("/device/dynamic_form/<%=params[:id]%>?device_type_id=<%=params[:device_type_id]%>",
+        function(){
+            //debugger;
+            $("#entry_device_type").change(function(){
+                //debugger;
+
+                $("#update_region").load("/device/dynamic_form/<%= params[:id]%>?device_type_id="+$(this).val());
+                //debugger;
+                //window.location.href="/device/new/<%= params[:id]%>?device_type_id="+$(this).val();
+
+            });
+        });
+
+        
+		
+
+
+    });
+
+</script>

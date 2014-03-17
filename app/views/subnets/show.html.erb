@@ -1,0 +1,47 @@
+<% @page_title = t(:subnet) %>
+
+
+  <div style="text-align: center" ><font size="4" color="#191970">
+    <%= @subnet.name %></font>
+  </div>
+  <table class="table table-hover">
+    <tr>
+      <td class="col-md-2" style="color: orange"><%= t :name %>:</td>
+      <td><%= @subnet.name %></td>
+    </tr>
+    <tr>
+      <td class="title" style="color: orange"><%= t :Location %>:</td>
+      <td><%= @subnet.cidr %></td>
+    </tr>
+    <tr>
+      <td class="title" style="color: orange"><%= t :description %>:</td>
+      <td><%= @subnet.description %></td>
+    </tr>
+    <tr>
+      <td class="title" style="color: orange"><%= t :create_at %>:</td>
+      <td><%= @subnet.created_at.to_s(:long) %></td>
+    </tr>
+    <tr>
+      <td class=col-md-2" style="color: orange"><%= t :update_at %>:</td>
+      <td><%= @subnet.updated_at.to_s(:long) %></td>
+    </tr>
+    <tr>
+      <td class="col-md-2" style="color: orange"><%= t :create_by %>:</td>
+      <td><%= @subnet.author.name.length > 0 ? @subnet.author.name : @subnet.author.username %></td>
+    </tr>
+    <%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype != "End_user" %>
+    <tr>
+      <td class="buttons" colspan="2">
+        <%= link_to(t("list"), {:action => 'list'}, :class => "btn btn-info") %>
+        <%= link_to(t("edit"), {:action => 'edit', :id => @subnet.id}, :class => "btn btn-warning") %>
+      </td>
+    </tr>
+    <%end%>
+  </table>
+  <%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype == "End_user" %>
+      <div class="Third_links">
+        <br>
+        <%= link_to("Back",{:controller => 'subnets', :action => 'view_user'},:class=>"btn btn-info")%>
+      </div>
+  <%end%>
+

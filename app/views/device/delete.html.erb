@@ -1,0 +1,21 @@
+<% @page_title = "Delete Device" %>
+<div class="jumbotron" xmlns="http://www.w3.org/1999/html">
+
+  <%= form_for(:device, :url => {:action => 'destroy', :id => @device.id}) do |f| %>
+<p>
+     <font color="white"> <%= "Are you sure you want to delete" %></font>
+
+     <font color="red"><%= @device.device_name %></font>
+</p>
+
+           <%= link_to("No", {:action => 'list', :id => @subnet.id}, :class => "btn btn-success") %>
+     <button type="submit" class="btn btn-danger" ><%= "Yes" %></button>
+  <% end %>
+</div>
+<%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype == "End_user" %>
+    <div class="Third_links">
+      <br>
+      <%= link_to("Back",{:controller => 'subnets', :action => 'view_user'},:class => '"btn btn-info"')%>
+    </div>
+
+<%end%>

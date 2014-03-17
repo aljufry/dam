@@ -1,0 +1,72 @@
+<table class="form">
+  <tr>
+    <td class="caption"><label for="name"><%= f.label("Server name") %>:</label></td>
+    <td class="data"> <%= f.text_field(:device_name, :maxlength => 255, :size => 30)  %> </td>
+  </tr>
+  <tr>
+    <td class="caption"><label for="name"><%= f.label(:model) %>:</label></td>
+    <td class="data"> <%= f.text_field(:model, :maxlength => 255, :size => 30)  %> </td>
+  </tr>
+  <tr>
+    <td class="caption"><label for="name"><%= f.label(:operating_system) %>:</label></td>
+    <td class="data"> <%= f.text_field(:operating_system, :maxlength => 100, :size => 30)  %> </td>
+  </tr>
+  <tr>
+    <td class="caption"><label for="name"><%= f.label(:serial_number) %>:</label></td>
+    <td class="data"> <%= f.text_field(:serial_number, :maxlength => 255, :size => 30)  %> </td>
+  </tr>
+  <tr>
+    <td class="caption"><label for="name"><%= f.label(:ip) %>:</label></td>
+    <td class="data"> <%= f.text_field(:ip, :maxlength => 15, :size => 20)  %> </td>
+  </tr>
+  <tr>
+    <td class="caption"><label for="name"><%= f.label(:public_ip) %>:</label></td>
+    <td class="data"> <%= f.text_field(:public_ip, :maxlength => 100, :size => 20)  %> </td>
+  </tr>
+  <tr>
+    <td class="caption"><label for="name"><%= f.label(:warranty) %>:</label></td>
+    <td class="data"> <%= f.date_select(:warranty, :prompt => { :day => t(:day), :month => t(:month), :year => t(:year) })  %> </td>
+  </tr>
+  <tr>
+    <td class="caption"><label for="name"><%= f.label(:location) %>:</label></td>
+    <td class="data"> <%= f.text_field(:location, :maxlength => 200, :size => 30)  %> </td>
+  </tr>
+  <tr>
+    <td class="caption"><label for="name"><%= f.label(:segment) %>:</label></td>
+    <td class="data"> <%= f.text_field(:segment, :maxlength => 100, :size => 30)  %> </td>
+  </tr>
+  <tr>
+    <td class="caption"><label for="name"><%= f.label(:application) %>:</label></td>
+    <td class="data"> <%= f.text_field(:application, :maxlength => 100, :size => 30)  %> </td>
+  </tr>
+  <tr>
+    <td class="caption"><label for="name"><%= f.label(:username) %>:</label></td>
+    <td class="data"> <%= f.text_field(:username, :maxlength => 200, :size => 30)  %> </td>
+  </tr>
+  <tr>
+    <td class="caption"><label for="name"><%= f.label(:password) %>:</label></td>
+    <td class="data"> <%= f.text_field(:password, :maxlength => 200, :size => 30)  %> </td>
+  </tr>
+  <tr>
+    <td class="caption"><label for="name"><%= f.label(:remarks) %>:</label></td>
+    <td class="data"> <%= f.text_area(:remarks, :maxlength => 200, :cols => 50, :rows => 10)  %> </td>
+  </tr>
+  
+  <tr>
+    <td class="buttons" colspan="2">
+      <%= link_to(t("list"), {:action => 'list', :id => @subnet.id}, :class => "button") %> 
+      <%= submit_tag(t(:save)) %>
+      <% if @server.id %>
+      <br/><br/><br/>
+      <%= link_to(t("delete"), {:action => 'delete', :id => @subnet.id}, :class => "button") %>
+      <%= link_to(t("show"), {:action => 'show', :id => @subnet.id}, :class => "button") %>
+      <% end %>
+    </td>
+  </tr>
+</table>
+<script type="text/javascript">
+  var input = $("#server_server_name");
+  if (input != null && input != undefined) {
+    input.focus();
+  }   
+</script>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+      div.img
+      {
+          margin: 5px;
+          padding: 5px;
+          border: 1px solid #0000ff;
+          height: auto;
+          width: auto;
+          float: left;
+          text-align: center;
+      }
+      div.img img
+      {
+          display: inline;
+          margin: 5px;
+          border: 1px solid #ffffff;
+      }
+      div.img a:hover img {border: 1px solid #0000ff;}
+      div.desc
+      {
+          text-align: center;
+          font-weight: normal;
+          width: 120px;
+          margin: 5px;
+      }
+  </style>
+</head>
+<body>
+<% @page_title = t(:subnets) %>
+
+<!--<div class="jumbotron">-->
+
+<div style="text-align: center">
+ <img border="0" src="/assets/Logo.JPG" alt="Data Center" width="400" height="200" >
+</div>
+
+
+
+<!--</div>-->
+
+<div class="pageTitle"></div>
+</br>
+<div class="table table-hover">
+  <table class="table table-condensed">
+    <tr class="alert-info">
+      <td class="title">#</td>
+      <td class="title"><%= t :name %></td>
+      <td class="title"><%= "Location" %></td>
+      <td class="title"><%= t :description %></td>      
+      <td class="title"><%= t :create_at %></td>
+      <td class="title"><%= t :update_at %></td>
+      <td class="title"><%= t :create_by %></td>
+      <td class="title"><%= t :actions %></td>
+    </tr>
+    <% index = 0 %>
+    <% @subnets.each do |subnet| %>
+    <% index += 1 %>
+    <% class_name = index % 2 == 0 ? 'even' : 'odd' %>
+    <tr class='<%= class_name %>'>
+      <td class="index"><%= index %></td>
+      <td><%= subnet.name %></td>
+      <td><%= subnet.cidr %></td>
+      <td><%= subnet.description %></td>      
+      <td><%= subnet.created_at.to_s(:short) %></td>
+      <td><%= subnet.updated_at.to_s(:short) %></td>
+      <td><%= subnet.author.name.length > 0 ? subnet.author.name : subnet.author.username %></td>
+      <td class="alert-danger">
+        <%= link_to(t(:List), {:controller => 'device', :action => 'list', :id => subnet.id}) %>
+        |
+        <%= link_to(t(:show), {:action => 'show', :id => subnet.id}) %>
+        |
+        <%= link_to(t(:edit), {:action => 'edit', :id => subnet.id}) %>
+        |
+        <!--<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Delete</button>-->
+        <%= link_to(t(:delete), {:action => 'delete', :id => subnet.id}, {:class=> 'btn-delete'}) %>
+      </td>
+
+    </tr>
+    <% end %>
+    <tr>
+      <!--<td colspan="8" class="pagination">-->
+      <td>
+      <%= will_paginate @subnets, :previous_label => t(:previous), :next_label => t(:next) %>
+      </td>
+    </tr>
+  </table>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">Delete Data Center</h4>
+        </div>
+        <div class="modal-body">
+
+        </div>
+        <div class="modal-footer">
+          <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+          <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+
+<script>
+  $(function(){
+     $('.btn-delete').click(function(e){
+
+         $('#myModal').modal('show');
+         $('#myModal .modal-body').load($(this).attr("href")+"?nolayout=1");
+         e.preventDefault();
+     });
+
+
+  });
+</script>

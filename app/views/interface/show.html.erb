@@ -1,0 +1,90 @@
+<% @page_title = "Interface" %>
+<div style="text-align: center">
+  <img border="0" src="/assets/Logo.JPG" alt="Data Center" width="200" height="100" >
+</div>
+
+<div style="text-align: center"><font color="#191970">
+  <%= "Interfaces" %> <%= "of" %> <%= @device.device_type %> <%= "("%> <%=@device.device_name %> <%=")" %>
+</font></div>
+  <table class="table table-hover">
+    <tr>
+      <td class="title"><%= "Physical label" %>:</td>
+      <td><%= @interface.physical_label %></td>
+    </tr>
+
+    <tr>
+      <td class="title"><%= "Name" %>:</td>
+      <td><%= @interface.interface_name %></td>
+    </tr>
+    <tr>
+    <td class="title"><%= " IP Address " %>:</td>
+    <td><%= @interface.ip_add %></td>
+  </tr>
+    <tr>
+      <td class="title"><%= " Netmask " %>:</td>
+      <td><%= @interface.net_mask %></td>
+    </tr>
+    <tr>
+      <td class="title"><%= " DNS " %>:</td>
+      <td><%= @interface.dns %></td>
+    </tr>
+    <tr>
+      <td class="title"><%= " Hardware Address " %>:</td>
+      <td><%= @interface.hw_add %></td>
+    </tr>
+    <tr>
+      <td class="title"><%= "remarks" %>:</td>
+      <td><%= @interface.remarks %></td>
+    </tr>
+    <tr>
+      <td class="title"><%= "Created" %>:</td>
+      <td><%= @interface.created_at.to_s(:long) %></td>
+    </tr>
+    <tr>
+      <td class="title"><%= "Last updated" %>:</td>
+      <td><%= @interface.updated_at.to_s(:long) %></td>
+    </tr>
+    <tr>
+      <td class="title"><%= "Owner" %>:</td>
+      <td><%= @interface.author.name.length > 0 ? @interface.author.name : @interface.author.username %></td>
+    </tr>
+
+  </table>
+
+  <%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype != "End_user" %>
+
+    <%= link_to("Close", {:controller => 'device',:action => 'list', :id => @device.subnet.id}, :class => "btn btn-danger") %>
+
+
+
+  <%end%>
+  <script type="text/javascript">
+
+      $(document).ready(function() {
+          try {
+              $('span#password').css('background-color', 'black');
+              $('span#password').css('border-radius', '3px');
+              $('span#password').css('cursor', 'default');
+
+              $('span#password').mouseenter(function() {
+                  $('span#password').css('background-color', 'transparent');
+              });
+
+              $('span#password').mouseout(function() {
+                  setTimeout("$('span#password').css('background-color', 'black');", 1000);
+              });
+          } catch (e) {
+              console.log(e);
+          }
+      });
+
+
+
+  </script>
+</div>
+<%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype == "End_user" %>
+    <div class="Third_links">
+      <br>
+      <%= link_to("Back",{:controller => 'subnets', :action => 'view_user'},:class=>"button")%>
+    </div>
+<%end%>

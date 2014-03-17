@@ -1,0 +1,32 @@
+<table class="table table-hover">
+  <tr>
+    <td class="caption"><label for="name"><%= f.label(:name) %>:</label></td>
+    <td class="data"> <%= f.text_field(:name, :maxlength => 100, :size => 30)  %> </td>
+  </tr>
+  <tr>
+    <td class="caption"><label for="name"><%= f.label("Location") %>:</label></td>
+    <td class="data"> <%= f.text_field(:cidr, :maxlength => 20, :size => 30)  %> <span></span></td>
+  </tr>
+  <tr>
+    <td class="caption"><label for="name"><%= f.label(:description) %>:</label></td>
+    <td class="data"> <%= f.text_field(:description, :maxlength => 255, :size => 60)  %> </td>
+  </tr>
+  <tr>
+    <td class="buttons" colspan="2">
+      <button type="submit"class="btn btn-success"><%="Save" %></button>
+
+      <% if @subnet.id %>
+      <%= link_to(t("list"), {:action => 'list'},:class => "btn btn-info") %>
+      <!--<%= link_to(t("delete"), {:action => 'delete', :id => @subnet.id}, :class => "button") %>-->
+      <!--<%= link_to(t("show"), {:action => 'show', :id => @subnet.id}, :class => "button") %>-->
+      <% end %>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  var input = $("#subnet_name");
+  if (input != null && input != undefined) {
+    input.focus();
+  }
+</script>

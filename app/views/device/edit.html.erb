@@ -1,0 +1,29 @@
+
+<% @page_title = "Edit Devices" %>
+<div class="pageTitle">
+  <%=  "Edit Device" %>
+</div>
+
+
+  <%= form_for(:device, :url => {:action => 'update', :id => @device.id}) do |f| %>
+      <% if @device.errors.any? %>
+
+          <div class="error">
+            <ul>
+              <% @device.errors.full_messages.each do |message| %>
+                  <li>
+                    <%= message %>
+                  </li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+      <%= render(:partial => "formEdit", :locals => {:f => f}) %>
+  <% end %>
+
+<%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype == "End_user" %>
+<div class="Third_links">
+  <br>
+  <%= link_to("Back",{:controller => 'subnets', :action => 'view_user'}, :class => 'btn btn-info')%>
+</div>
+<%end%>

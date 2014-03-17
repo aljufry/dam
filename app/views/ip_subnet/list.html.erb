@@ -1,0 +1,52 @@
+<% @page_title = @device.device_name  ,"::" , @interface.interface_name,"::","IP Address" %>
+
+<% if @interface != nil %>
+    <div class="pageTitle">
+      <%= "Interfaces" %> <%= "of" %> <%= @interface.interface_name %> <%= "("%> <%=@interface.interface_name %> <%=")" %>
+    </div>
+    <div class="second_links">
+      <%= link_to("IP Address", :action => 'new', :id => @interface.id)%>
+    </div>
+    <div class="grid">
+      <table class="grid" cellspacing="4">
+        <tr>
+          <td class="title"></td>
+          <td class="title"><%= "IP" %></td>
+          <td class="title"><%= "Subnet" %></td>
+          <td class="title"><%= t :create_at %></td>
+          <td class="title"><%= t :update_at %></td>
+          <td class="title"><%= t :create_by %></td>
+          <td class="title"><%= t :actions %></td>
+        </tr>
+        <% index = 0 %>
+        <% @ip_subnets.each do |ip_subnet| %>
+            <% index += 1 %>
+            <% class_name = index % 2 == 0 ? 'even' : 'odd' %>
+            <tr class='<%= class_name %>'>
+              <td class="index"><%= index %></td>
+              <td><%= ip_subnet.ip %></td>
+              <td><%= ip_subnet.subnet%></td>
+              <td><%= ip_subnet.created_at.to_s(:short) %></td>
+              <td><%= ip_subnet.updated_at.to_s(:short) %></td>
+              <td><%= ip_subnet.author.name.length > 0 ? ip_subnet.author.name : ip_subnet.author.username %></td>
+              <td class="actions">
+
+                <%= link_to("show", {:action => 'show', :id => ip_subnet.id}) %>
+                |
+                <%= link_to(t(:edit), {:action => 'edit', :id => ip_subnet.id}) %>
+                |
+                <%= link_to(t(:delete), {:action => 'delete', :id => ip_subnet.id}) %>
+            </td>
+            </tr>
+        <% end %>
+        <tr>
+          <td colspan="8" class="pagination"> <%= will_paginate @ip_subnets, :previous_label => t(:previous), :next_label => t(:next) %> </td>
+        </tr>
+      </table>
+      <div class="Third_links">
+        <br>
+        <%= link_to(t("Back"), {:controller => 'interface',:action => 'list', :id =>@interface.entry.subnet.id}, :class => "button") %>
+      </div>
+    </div>
+
+<% end %>

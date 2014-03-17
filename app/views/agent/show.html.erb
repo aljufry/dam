@@ -1,0 +1,32 @@
+<h1><%=h @agent.name %></h1>
+
+<p>
+	<em>IP Address:</em> <%=h @agent.ip_address %>
+</p>
+
+<div id="interfaces_view">
+<%= image_tag 'spinner.gif' %> <em>Loading Interfaces...</em>
+</div>
+
+
+
+<script type="text/javascript" language="JavaScript">
+    function toggle_interface() {
+        current_interface_name = document.getElementById("current_interface").value
+        interfaces = document.getElementById('interfaces').childNodes
+        for (var i = 0; i < interfaces.length; i++) {
+            if (interfaces[i].style) {
+                interfaces[i].style.display = "none";
+            }
+        }
+        document.getElementById("interface_" + current_interface_name).style.display = "";
+    }
+    <%= link_to "url", :controler=>'agent',:action => 'load_interfaces', :id => @agent.id %>
+</script>
+
+<p>
+  <%= link_to "ddd",:action => 'load_interfaces', :id => @agent.id%>
+
+  <%= link_to 'Edit Agent', :action =>'edit',:id=>@agent %> |
+  <%= link_to 'Delete Agent',:controller => 'agents', :action => 'destroy', :id => @agent.id, :method => 'delete', :confirm => "Are you sure you want permanently to delete this agent?" %>
+</p>

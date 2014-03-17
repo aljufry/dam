@@ -1,0 +1,92 @@
+<% @page_title = "Connections" %>
+
+<div class="form">
+  <div class="name">
+    <%= @connection.device_name %>
+  </div>
+  <table class="item">
+    <tr>
+      <td class="title"><%= "Device Name" %>:</td>
+      <td><%= @connection.device_name %></td>
+    </tr>
+    <tr>
+      <td class="title"><%= " Model" %>:</td>
+      <td><%= @connection.model %></td>
+    </tr>
+    <tr>
+      <td class="title"><%= "Serial Number" %>:</td>
+      <td><%= @connection.serial_number %></td>
+    </tr>
+    <tr>
+      <td class="title"><%= " IP Address " %>:</td>
+      <td><%= @connection.ip %></td>
+    </tr>
+
+    <tr>
+      <td class="title"><%= " Username " %>:</td>
+      <td><%= @connection.username %></td>
+    </tr>
+    <tr>
+      <td class="title"><%= "Password"%>:</td>
+      <td><span id="password"><%= @connection.password %></span></td>
+    </tr>
+    <tr>
+      <td class="title"><%= "Warranty" %>:</td>
+      <td><%= @connection.warranty != nil ? @connection.warranty.to_s(:long) : '' %></td>
+    </tr>
+    <tr>
+      <td class="title"><%= "location" %>:</td>
+      <td><%= @connection.location %></td>
+    </tr>
+
+
+    <tr>
+      <td class="title"><%= "remarks" %>:</td>
+      <td><%= @connection.remarks %></td>
+    </tr>
+    <tr>
+      <td class="title"><%= "Create_at" %>:</td>
+      <td><%= @connection.created_at.to_s(:long) %></td>
+    </tr>
+    <tr>
+      <td class="title"><%= t :update_at %>:</td>
+      <td><%= @connection.updated_at.to_s(:long) %></td>
+    </tr>
+    <tr>
+      <td class="title"><%= t :create_by %>:</td>
+      <td><%= @connection.author.name.length > 0 ? @connection.author.name : @connection.author.username %></td>
+    </tr>
+
+  </table>
+
+
+  <div class="second_links">
+    <%= link_to("list", {:action => 'list' ,:id => @connection.entry.id}, :class => "button") %>
+    <%= link_to("Edit", {:action => 'edit' ,:id => @connection.id}, :class => "button") %>
+    <%= link_to("Delete", {:action => 'delete' ,:id => @connection.id}, :class => "button") %>
+
+  </div>
+  <script type="text/javascript">
+
+      $(document).ready(function() {
+          try {
+              $('span#password').css('background-color', 'black');
+              $('span#password').css('border-radius', '3px');
+              $('span#password').css('cursor', 'default');
+
+              $('span#password').mouseenter(function() {
+                  $('span#password').css('background-color', 'transparent');
+              });
+
+              $('span#password').mouseout(function() {
+                  setTimeout("$('span#password').css('background-color', 'black');", 1000);
+              });
+          } catch (e) {
+              console.log(e);
+          }
+      });
+
+
+
+  </script>
+</div>
