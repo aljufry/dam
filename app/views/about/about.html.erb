@@ -1,4 +1,4 @@
-<% @page_title = t(:login) %>
+<% @page_title = t(:about) %>
 
 <div class="pageTitle"></div>
 
@@ -13,21 +13,25 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#"><FONT COLOR="#20b2aa">CNAM</FONT></a>
+
     </div>
 
 
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-       <%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype == "End_user" %>
+        <li><%= link_to("DAM",:controller => 'about', :action => 'welcome') %></li>
+        <%if  session[:user_id]==nil %>
+        <li><%= link_to("Home",:controller => 'access', :action => 'login') %></li>
+        <%end%>
+        <%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype == "Visitor" %>
         <li><%= link_to("Home",:controller => 'subnets', :action => 'view_user') %></li>
         <li><%= link_to("about",:controller => 'about', :action => 'about') %></li>
        <%end%>
-        <%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype == "Admin_User" %>
+        <%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype == "Administrator" %>
             <li><%= link_to("Home",:controller => 'users', :action => 'list') %></li>
             <li><%= link_to("about",:controller => 'about', :action => 'about') %></li>
         <%end%>
-        <%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype == "Administrator" %>
+        <%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype == "Technical" %>
             <li><%= link_to("Home",:controller => 'subnets', :action => 'list') %></li>
             <li><%= link_to("about",:controller => 'about', :action => 'about') %></li>
         <%end%>

@@ -10,9 +10,10 @@
     <tr>
       <td class="title">#</td>
       <td class="title"><%= t :Type %></td>
-      <td class="title"><%= t :create_at %></td>
-      <td class="title"><%= t :update_at %></td>
-      <td class="title"><%= t :create_by %></td>
+      <!--<td class="title"><%= t :create_at %></td>-->
+      <!--<td class="title"><%= t :update_at %></td>-->
+      <td class="title"><%= "Created" %></td>
+      <td class="title"><%= "Last Updated"%></td>
       <td class="title"><%= t :actions %></td>
     </tr>
     <% index = 0 %>
@@ -22,9 +23,14 @@
         <tr class='<%= class_name %>'>
           <td class="index"><%= index %></td>
           <td><%= newdevice.device_type %></td>
-          <td><%= newdevice.created_at.to_s(:short) %></td>
-          <td><%= newdevice.updated_at.to_s(:short) %></td>
-          <td><%= newdevice.author.name.length > 0 ? newdevice.author.name : newdevice.author.username %></td>
+          <td><%= newdevice.created_at.to_s(:short) %><font color="red"><%="   by  " %></font><%= newdevice.author%></td>
+          <%if newdevice.update_author== nil%>
+              <td>---</td>
+              <%else%>
+                <td><%= newdevice.updated_at.to_s(:short) %><font color="red"><%="   by  " %></font><%= newdevice.update_author%></td>
+              <%end%>
+
+
           <td class="actions">
 
             <%= link_to(t(:show), {:action => 'show', :id => newdevice.id}) %>

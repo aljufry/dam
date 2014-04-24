@@ -48,19 +48,43 @@
 
 <!--Admin User------------------------------------------------->
 <div class="navbar navbar-inverse navbar-fixed-top">
+
   <div class="container">
 
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#"><FONT COLOR="#20b2aa">DAM</FONT></a>
+      <span class="icon-bar"> </span>
+
     </div>
-    <%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype == "Admin_User" %>
+
+    <%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype == "Administrator" %>
         <ul class="nav navbar-nav">
+          <li><%= link_to("DAM",:controller => 'dashboard', :action => 'welcome') %></li>
           <li><%= link_to("Users", :controller => 'users', :action => 'list') %></li>
+          <ul class="nav navbar-nav">
+            <li class="dropdpwn">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Data Center <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><%= link_to("List", :controller => 'subnets', :action => 'list') %></li>
+                <li><%= link_to("Overall View", :controller => 'subnets',:action => 'view')%></li>
+                <li><%= link_to("Create", :controller => 'subnets', :action => 'new') %></li>
+              </ul>
+            </li>
+            <li class="dropdpwn">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">New Type <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><%= link_to("List", :controller => 'newdevice', :action => 'list') %></li>
+              </ul>
+            </li>
+            </ul>
+
+
 
           <li class="dropdpwn">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=User.find(session[:user_id].to_i).name%><b class="caret"></b></a>
@@ -73,7 +97,7 @@
               <li><%= link_to(t('Sign Out'),{:controller => 'access', :action => 'logout'}) %></li>
             </ul>
           </li>
-          <li><%= link_to("Home",:controller => 'users') %></li>
+
           <li><%= link_to("about",:controller => 'about', :action => 'about') %></li>
           <li><a href=http://szar.org/v2/contactus.html>Contact</a></li>
           <!--<input type="text" placeholder="User name" class="form-control">-->
@@ -91,8 +115,10 @@
     <%end%>
 
 
-    <%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype == "Administrator" %>
+    <%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype == "Technical" %>
+
         <ul class="nav navbar-nav">
+          <li><%= link_to("DAM",:controller => 'dashboard', :action => 'welcome') %></li>
           <li class="dropdpwn">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Data Center <b class="caret"></b></a>
             <ul class="dropdown-menu">
@@ -137,8 +163,10 @@
     <%end%>
 
 
-    <%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype == "End_user" %>
+    <%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype == "Visitor" %>
         <ul class="nav navbar-nav">
+          <li><%= link_to("DAM",:controller => 'dashboard', :action => 'welcome') %></li>
+          <li><%= link_to("Overall View",:controller => 'subnets', :action => 'view_user') %></li>
           <li class="dropdpwn">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=User.find(session[:user_id].to_i).name%><b class="caret"></b></a>
             <ul class="dropdown-menu">

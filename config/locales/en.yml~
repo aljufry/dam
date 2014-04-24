@@ -1,0 +1,142 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  account_disabled: "Your account has been disabled!"
+  actions: "Actions"
+  app_title: "Diminut"  
+  cidr: "Data Center Name"
+  change_name: "Change Name"
+  change_password: "Change Password"
+  create_at: "Created"
+  create_by: "Author"
+  confirm_password: "Confirm Password"
+  confirm_password_does_not_match: "Confirmation of new password does not match!"
+  copyright: "Copyright"
+  delete: "Delete"
+  delete_subnet: "Delete Subnet"
+  delete_server: "Delete Server"
+  deleted_successfully: "Deleted Successfully."
+  description: "Description"
+  disabled: "Disabled"
+  diminut: "Diminut"
+  does_not_match: "does not match!"
+  edit: "Edit"
+  editor: "Editor"
+  edit_subnet: "Edit Subnet"
+  edit_server: "Edit Server"
+  entries: "Servers"
+  enter_new_password: "New password can not be blank!"
+  enter_old_password: "Please enter your current password."
+  edit_user: "Edit User"
+  errors: "Errors"
+  emgraft: "Emgraft Systems"
+  ip: "IP"
+  list: "List"
+  login: "Sign In"
+  logged_in_successfully:  "You have signed in successfully."
+  logged_out_successfully: "You have signed out successfully."
+  model: "Model"
+  name: "Name"
+  next: "Next"
+  new: "New"
+  new_subnet: "New Subnet"
+  new_user: "New User"
+  new_password: "New Password"
+  no1: "No"
+  of: of
+  old_password: Current Password
+  operating_system: "Operating System"
+  password: "Password"
+  previous : "Previous"
+  public_ip: "Public IP"
+  reset_password: "Reset Password"
+  save: "Save"
+  server: "Server"
+  servers: "Servers"
+  server_name: "Server Name"
+  show: "Show"
+  subnets: "Subnets"  
+  saved_successfully: "Saved Successfully."
+  sure_to_delete_subnet: "Are you sure you want to delete this datacenter?"
+  sure_to_delete_user: "Are you sure you want to delete this user?"
+  sure_to_delete_server: "Are you sure you want to delete this server?"
+  type: "Type"
+  update_at: "Updated"
+  username: "Username"
+  users: "Users"
+  unknown_error: "Unknown Error!!!"
+  viewer: "Viewer"
+  wrong_username_or_password: "Wrong username or password!"
+  wrong_old_password: "Old password is incorrect!"
+  yes1: "Yes"  
+  you_have_not_logged_in: "You have redirected to sign in page since you had not signed in."
+  you_do_not_have_edit_privilege: "You do not have privilege to edit or create."
+  
+  
+  
+  activerecord:
+    attributes:
+      subnet:
+        name: "Location"
+        cidr: "Name"
+      user:
+        username: "Username"
+        name: "Name"
+        password: "Password"
+        plain_password: "Password"   
+      
+      
+      entry:
+        ip: "IP"
+        public_ip: "Public IP"
+        server_name: "Server Name"
+        model: "Model"
+        operating_system: "Operating System"
+        serial_number: "Serial Number"
+        warranty: "Warranty"
+        location: "Location"
+        segment: "Segment"
+        application: "Application"
+        username: "Username"
+        password: "Password"
+        remarks: "Remarks"  
+    errors:
+      models:
+        user:
+          attributes:
+            username:
+              blank: "can not be empty!"
+              too_short: "should be at least 4 characters!"
+              too_long: "should be at most 25 characters!"
+              invalid: "  : Enter valid email address"
+            plain_password:
+              too_short: "is too short!"
+        entry:
+          attributes:
+            subnet:
+              blank: "is null!"
+            server_name:
+              blank: "can not be empty!"
+            model:
+              blank: "can not be empty!"
+            operating_system:
+              blank: "can not be empty!"
+            serial_number:
+              blank: "can not be empty!"
+            ip:
+              blank: "can not be empty!"
+              too_long: "is too long!"
+              invalid: "is invalid!"
+            public_ip:
+              too_long: "is too long!"
+              invalid: "is invalid!"  
+        subnet:
+          attributes:            
+            author:
+              blank: "has not set!"
+            name:
+              blank: "can not be empty!"   
+            cidr:
+              blank: "can not be empty!"
+              invalid: "is invalid! The correct format is something like 10.0.0.0/8"            

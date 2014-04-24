@@ -77,12 +77,12 @@ class InterfaceController < ApplicationController
   end
 
   def update
-
+    @device = Entry.find(params[:id])
     @interface= Interface.find(params[:id])
     device = @interface.entry
     user = recheck_logged_in_user
     if is_editor
-      @interface.author = user
+      @interface.update_author = user.username
       if @interface.update_attributes(params[:interface])
         flash[:info] = t(:saved_successfully)
         redirect_to(:controller=>'device',:action => 'list', :id => device.subnet.id)
@@ -108,7 +108,7 @@ class InterfaceController < ApplicationController
 
     if is_editor
       @interface.entry_id=params[:id].to_i
-      @interface.author = user
+      @interface.author = user.username
 
       if @interface.save
         flash[:info] = "saved_successfully."

@@ -23,7 +23,7 @@
         <UL>
           <% subnet.entries.each do |device| %>
               <LI><% if device.interfaces.size !=0 %><img src="/assets/expand.gif" alt="Click to expand!"/> <%end%><span>
-                <%= link_to(device.device_name, {:controller => "device",:action => 'show', :id => device.id}) %>
+                <%= link_to(device.host_name, {:controller => "device",:action => 'show', :id => device.id}) %>
                 <span style="color: #000d11;font-size: 10">(<%= device.device_type %>)</span> </span>
                 <UL>
                   <LI>
@@ -36,7 +36,8 @@
                           <td class="title"><%= "Name" %></td>
                           <td class="title"><%= "IP Address" %></td>
                           <td class="title"><%= "Net Mask" %></td>
-                          <td class="title"><%= "DNS" %></td>
+                          <td class="title"><%= "Prefered DNS" %></td>
+                          <td class="title"><%= "Alternative DNS" %></td>
                           <td class="title"><%= "HW Address" %></td>
 
                         </tr>
@@ -50,7 +51,8 @@
                               <td><%= interface.interface_name%></td>
                               <td><%= interface.ip_add%></td>
                               <td><%= interface.net_mask %></td>
-                              <td><%= interface.dns%></td>
+                              <td><%= interface.pre_dns%></td>
+                              <td><%= interface.alter_dns%></td>
                               <td><%= interface.hw_add%></td>
                             </tr>
                         <% end %>

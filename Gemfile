@@ -26,7 +26,7 @@ gem 'bootstrap-datepicker-rails'
 #gem 'bootstrap-sass'  #we may remove this
 gem 'ipcalc'
 
-gem 'snmp'
+gem 'snmp','~> 1.1.1'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -16,7 +16,7 @@ class NewdeviceController < ApplicationController
     @newdevice = Newdevice.new(params[:newdevice])
     user = recheck_logged_in_user
     if is_editor
-      @newdevice.author = user
+      @newdevice.author = user.username
       if @newdevice.save
         flash[:info] = t(:saved_successfully)
         redirect_to(:action => 'list')
@@ -62,7 +62,7 @@ class NewdeviceController < ApplicationController
     @newdevice = Newdevice.find(params[:id])
     user = recheck_logged_in_user
     if is_editor
-      @newdevice.author = user
+      @newdevice.update_author = user.username
       if @newdevice.update_attributes(params[:newdevice])
         flash[:info] = t(:saved_successfully)
         redirect_to(:action => 'list')

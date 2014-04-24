@@ -14,8 +14,8 @@
           <td class="title"><%= "Physical Label" %></td>
           <td class="title"><%= "Interface" %></td>
           <td class="title"><%= "IP Address" %></td>
-          <td class="title"><%= t :update_at %></td>
-          <td class="title"><%= t :create_by %></td>
+          <td class="title"><%= "Created" %></td>
+          <td class="title"><%= "Updated" %></td>
           <td class="title"><%= t :actions %></td>
         </tr>
         <% index = 0 %>
@@ -26,9 +26,9 @@
               <td class="index"><%= index %></td>
               <td><%= interface.physical_label %></td>
               <td><%= interface.interface_name%></td>
-              <td><%= interface.created_at.to_s(:short) %></td>
-              <td><%= interface.updated_at.to_s(:short) %></td>
-              <td><%= interface.author.name.length > 0 ? interface.author.name : interface.author.username %></td>
+              <td><%= interface.created_at.to_s(:short) %><font color="red"><%="by"%></font><td><%= interface.author%></td></td>
+              <td><%= interface.updated_at.to_s(:short) %><font color="red"><%="by"%></font><td><%= interface.update_author%></td></td>
+
               <td class="actions">
                 <%= link_to("IP",{:controller => 'ip_subnet', :action => 'list', :id => interface.id})%>
                 |

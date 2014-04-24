@@ -1,0 +1,49 @@
+<% @page_title = t(:users) %>
+
+
+  <div style="text-align: center" ><font size="4" color="#191970">
+    <%=@user.username %>  user</font>
+  </div>
+  <table class="table table-hover">
+    <tr>
+      <td class="col-md-2" style="color: orange"><%= t :name %>:</td>
+      <td><%= @user.name %></td>
+    </tr>
+    <tr>
+      <td class="title" style="color: orange"><%= t :email %>:</td>
+      <td><%= @user.email %></td>
+    </tr>
+    <tr>
+      <td class="title" style="color: orange"><%= t :usertype %>:</td>
+      <td><%= @user.usertype %></td>
+    </tr>
+    <tr>
+      <td class="col-md-2" style="color: orange"><%="Created at" %>:</td>
+      <td><%= @user.created_at.to_s(:short) %><font color="red"><%="   by  " %></font><%= @user.author %></td>
+    </tr>
+    <tr>
+      <td class=col-md-2" style="color: orange"><%= "Updated at"%>:</td>
+      <%if @user.update_author == nil%>
+          <td>----</td>
+          <%else%>
+      <td   ><%= @user.updated_at.to_s(:long) %><font color="red"><%="   by  " %></font><%= @user.update_author %></td>
+          <%end%>
+    </tr>
+
+
+    <%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype != "Visitor" %>
+    <tr>
+      <td class="buttons" colspan="2">
+        <%= link_to(t("list"), {:action => 'list'}, :class => "btn btn-info") %>
+        <%= link_to(t("edit"), {:action => 'edit', :id => @user.id}, :class => "btn btn-warning") %>
+      </td>
+    </tr>
+    <%end%>
+  </table>
+  <%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype == "Visitor" %>
+      <div class="Third_links">
+        <br>
+        <%= link_to("Back",{:controller => 'subnets', :action => 'view_user'},:class=>"btn btn-info")%>
+      </div>
+  <%end%>
+

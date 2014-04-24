@@ -14,8 +14,8 @@
           <th class="title"><%= "Type" %></th>
           <th class="title"><%= "Device Name" %></th>
           <th class="title" style="text-align: center"><%= "Interface" %></th>
-          <th class="title"><%= t :update_at %></th>
-          <th class="title"><%= t :create_by %></th>
+          <th class="title"><%= "Created"%></th>
+          <th class="title"><%= "Last Updated" %></th>
           <th class="title"><%= "Action" %></th>
 
         <tr>
@@ -51,7 +51,7 @@
                                  <td style="min-width: 100px"class="title"><%= "Name" %></td>
                                  <td class="title"><%= "IP Address" %></td>
                                  <td class="title"><%= "Net Mask" %></td>
-                                 <td class="title"><%= "DNS" %></td>
+                                 <td class="title"><%= "Pre & Alt DNS" %></td>
                                  <td class="title"><%= "MAC.Address" %></td>
                                  <td style="min-width: 100px" class="alert-danger"><%="Actions" %></td>
                                </tr>
@@ -65,7 +65,7 @@
                                      <td><%= interface.interface_name%></td>
                                      <td><%= interface.ip_add%></td>
                                      <td><%= interface.net_mask %></td>
-                                     <td><%= interface.dns%></td>
+                                     <td><%= interface.pre_dns%></br><%= interface.alter_dns%></td>
                                      <td><%= interface.hw_add%></td>
                                      <td class="alert-danger">
                                        <%= link_to image_tag("/assets/edit.png",:border=>0,:width => 20, :height => 20), {:controller => 'interface',:action => 'edit', :id => interface.id},{:class=>'btn-delete'}%>
@@ -85,8 +85,13 @@
                 </UL>
               </td>
               <!--"********************************"-->
-              <td><%= device.updated_at.to_s(:short) %></td>
-              <td><%= device.author.name.length > 0 ? device.author.name : device.author.username %></td>
+              <td><%= device.created_at.to_s(:short) %><font color="red"><%="   by  " %></font><%= device.author %></td>
+              <%if device.update_author == nil%>
+                  <td>----</td>
+                  <%else%>
+                    <td><%= device.updated_at.to_s(:short) %><font color="red"><%="   by  " %></font><%= device.update_author %></td>
+                  <%end%>
+
               <td>
                 <body link=RED>
               <%= link_to(t(:show), {:action => 'show', :id => device.id}) %>

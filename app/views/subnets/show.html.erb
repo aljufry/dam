@@ -18,18 +18,20 @@
       <td><%= @subnet.description %></td>
     </tr>
     <tr>
-      <td class="title" style="color: orange"><%= t :create_at %>:</td>
-      <td><%= @subnet.created_at.to_s(:long) %></td>
+      <td class="col-md-2" style="color: orange"><%="Created at" %>:</td>
+      <td><%= @subnet.created_at.to_s(:short) %><font color="red"><%="   by  " %></font><%= @subnet.author %></td>
     </tr>
     <tr>
-      <td class=col-md-2" style="color: orange"><%= t :update_at %>:</td>
-      <td><%= @subnet.updated_at.to_s(:long) %></td>
+      <td class=col-md-2" style="color: orange"><%= "Updated at"%>:</td>
+      <%if @subnet.update_author == nil%>
+          <td>----</td>
+          <%else%>
+      <td   ><%= @subnet.updated_at.to_s(:long) %><font color="red"><%="   by  " %></font><%= @subnet.update_author %></td>
+          <%end%>
     </tr>
-    <tr>
-      <td class="col-md-2" style="color: orange"><%= t :create_by %>:</td>
-      <td><%= @subnet.author.name.length > 0 ? @subnet.author.name : @subnet.author.username %></td>
-    </tr>
-    <%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype != "End_user" %>
+
+
+    <%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype != "Visitor" %>
     <tr>
       <td class="buttons" colspan="2">
         <%= link_to(t("list"), {:action => 'list'}, :class => "btn btn-info") %>
@@ -38,7 +40,7 @@
     </tr>
     <%end%>
   </table>
-  <%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype == "End_user" %>
+  <%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype == "Visitor" %>
       <div class="Third_links">
         <br>
         <%= link_to("Back",{:controller => 'subnets', :action => 'view_user'},:class=>"btn btn-info")%>

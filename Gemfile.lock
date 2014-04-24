@@ -115,6 +115,6 @@ DEPENDENCIES
   mysql2
   rails (= 3.2.8)
   sass-rails (~> 3.2.3)
-  snmp
+  snmp (~> 1.1.1)
   uglifier (>= 1.0.3)
   will_paginate

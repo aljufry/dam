@@ -8,19 +8,14 @@
   <td class="caption"><label for="name"><%= f.label("Device Type:") %>:</label></td>
   <td class="data"> <%= f.select(:device_type,options_for_select(@newdevices.map{|v| [v.device_type,v.device_type]},:selected =>params[:device_type_id]) )  %> </td>
     </tr>
-<% if @devicetype.device_name%>
-	<tr>
-		<td class="caption"><label for="name"><%= f.label("Device Name") %>:</label></td>
-		<td class="data"> <%= f.text_field(:device_name, :maxlength => 255, :size => 30)  %> </td>
-	</tr>
-      <%end%>
 
-  <%if @devicetype.host_name%>
+
+
   <tr>
     <td class="caption"><label for="name"><%= f.label("Hostname") %>:</label></td>
     <td class="data"> <%= f.text_field(:host_name, :maxlength => 255, :size => 30)  %> </td>
   </tr>
-  <%end%>
+
 
   <%if @devicetype.model%>
 	<tr>

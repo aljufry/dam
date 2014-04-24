@@ -29,7 +29,6 @@ ActiveRecord::Schema.define(:version => 20140306073155) do
   end
 
   create_table "entries", :force => true do |t|
-    t.integer  "user_id",                         :null => false
     t.integer  "subnet_id",                       :null => false
     t.string   "device_name"
     t.string   "host_name"
@@ -45,27 +44,25 @@ ActiveRecord::Schema.define(:version => 20140306073155) do
     t.string   "username"
     t.string   "password"
     t.text     "remarks"
+    t.string   "author",           :limit => 30
+    t.string   "update_author",    :limit => 30
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
   end
 
-  create_table "entries_tags", :id => false, :force => true do |t|
-    t.integer "entry_id"
-    t.integer "tag_id"
-  end
-
-  add_index "entries_tags", ["entry_id", "tag_id"], :name => "index_entries_tags_on_entry_id_and_tag_id"
-
   create_table "interfaces", :force => true do |t|
-    t.integer  "user_id",                       :null => false
     t.integer  "entry_id",                      :null => false
     t.string   "physical_label",                :null => false
     t.string   "interface_name", :limit => 200
     t.string   "ip_add",         :limit => 100
     t.string   "net_mask"
-    t.string   "dns"
+    t.string   "def_getaway"
+    t.string   "pre_dns"
+    t.string   "alter_dns"
     t.string   "hw_add"
     t.string   "remarks"
+    t.string   "author",         :limit => 30
+    t.string   "update_author",  :limit => 30
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
   end
@@ -81,7 +78,6 @@ ActiveRecord::Schema.define(:version => 20140306073155) do
   end
 
   create_table "newdevices", :force => true do |t|
-    t.integer  "user_id",          :null => false
     t.string   "device_type"
     t.boolean  "device_name"
     t.boolean  "host_name"
@@ -96,8 +92,10 @@ ActiveRecord::Schema.define(:version => 20140306073155) do
     t.boolean  "username"
     t.boolean  "password"
     t.boolean  "remarks"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.string   "author",           :limit => 30
+    t.string   "update_author",    :limit => 30
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "snmps", :force => true do |t|
@@ -106,12 +104,13 @@ ActiveRecord::Schema.define(:version => 20140306073155) do
   end
 
   create_table "subnets", :force => true do |t|
-    t.string   "name",        :limit => 100, :null => false
-    t.string   "cidr",        :limit => 20,  :null => false
+    t.string   "name",          :limit => 100, :null => false
+    t.string   "cidr",          :limit => 20,  :null => false
     t.string   "description"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
-    t.integer  "user_id",                    :null => false
+    t.string   "author",        :limit => 30
+    t.string   "update_author", :limit => 30
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
   create_table "tags", :force => true do |t|
@@ -129,15 +128,18 @@ ActiveRecord::Schema.define(:version => 20140306073155) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "username",                                     :null => false
-    t.string   "password",                                     :null => false
-    t.string   "usertype",   :limit => 200,                    :null => false
-    t.boolean  "editor",                    :default => false
-    t.boolean  "viewer",                    :default => true
-    t.string   "name",       :limit => 200
-    t.datetime "created_at",                                   :null => false
-    t.datetime "updated_at",                                   :null => false
-    t.string   "salt",       :limit => 100,                    :null => false
+    t.string   "username",                                        :null => false
+    t.string   "password",                                        :null => false
+    t.string   "usertype",      :limit => 200,                    :null => false
+    t.boolean  "editor",                       :default => false
+    t.boolean  "viewer",                       :default => true
+    t.string   "name",          :limit => 200,                    :null => false
+    t.string   "email",         :limit => 200,                    :null => false
+    t.string   "salt",          :limit => 100,                    :null => false
+    t.string   "author",        :limit => 30
+    t.string   "update_author", :limit => 30
+    t.datetime "created_at",                                      :null => false
+    t.datetime "updated_at",                                      :null => false
   end
 
 end

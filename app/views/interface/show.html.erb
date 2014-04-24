@@ -7,6 +7,8 @@
   <%= "Interfaces" %> <%= "of" %> <%= @device.device_type %> <%= "("%> <%=@device.device_name %> <%=")" %>
 </font></div>
   <table class="table table-hover">
+
+
     <tr>
       <td class="title"><%= "Physical label" %>:</td>
       <td><%= @interface.physical_label %></td>
@@ -25,8 +27,16 @@
       <td><%= @interface.net_mask %></td>
     </tr>
     <tr>
-      <td class="title"><%= " DNS " %>:</td>
-      <td><%= @interface.dns %></td>
+      <td class="title"><%= " Default Getaway " %>:</td>
+      <td><%= @interface.def_getaway %></td>
+    </tr>
+    <tr>
+      <td class="title"><%= " preferred DNS " %>:</td>
+      <td><%= @interface.pre_dns %></td>
+    </tr>
+    <tr>
+      <td class="title"><%= " Alternative DNS " %>:</td>
+      <td><%= @interface.alter_dns %></td>
     </tr>
     <tr>
       <td class="title"><%= " Hardware Address " %>:</td>
@@ -38,20 +48,20 @@
     </tr>
     <tr>
       <td class="title"><%= "Created" %>:</td>
-      <td><%= @interface.created_at.to_s(:long) %></td>
+      <td><%= @interface.created_at.to_s(:long) %><font color="red"><%= "by" %></font><%= @interface.author %></td>
     </tr>
     <tr>
       <td class="title"><%= "Last updated" %>:</td>
-      <td><%= @interface.updated_at.to_s(:long) %></td>
-    </tr>
-    <tr>
-      <td class="title"><%= "Owner" %>:</td>
-      <td><%= @interface.author.name.length > 0 ? @interface.author.name : @interface.author.username %></td>
+      <%if @interface.update_author== nil%>
+          <td>----</td>
+        <%else%>
+          <td><%= @interface.updated_at.to_s(:long) %><font color="red"><%= "by" %></font><%= @interface.update_author %></td></td>
+        <%end%>
     </tr>
 
   </table>
 
-  <%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype != "End_user" %>
+  <%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype != "Visitor" %>
 
     <%= link_to("Close", {:controller => 'device',:action => 'list', :id => @device.subnet.id}, :class => "btn btn-danger") %>
 
@@ -82,7 +92,7 @@
 
   </script>
 </div>
-<%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype == "End_user" %>
+<%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype == "Visitor" %>
     <div class="Third_links">
       <br>
       <%= link_to("Back",{:controller => 'subnets', :action => 'view_user'},:class=>"button")%>

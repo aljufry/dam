@@ -20,17 +20,17 @@ class AccessController < ApplicationController
         session[:user_name] = logged_in_user.name.blank? ? logged_in_user.username : logged_in_user.name
 
         flash[:info] = I18n.t('logged_in_successfully')
-        if logged_in_user.usertype=='Administrator'
-          redirect_to(:controller => 'subnets', :action => 'list')
+        if logged_in_user.usertype=='Technical'
+          redirect_to(:controller => 'dashboard', :action => 'welcome')
           return
         end
-        if logged_in_user.usertype == "Admin_User"
-          redirect_to(:controller => 'users', :action => 'list')
+        if logged_in_user.usertype == 'Administrator'
+          redirect_to(:controller => 'dashboard', :action => 'welcome')
           return
         end
 
-        if logged_in_user.usertype == "End_user"
-          redirect_to(:controller => 'subnets', :action => 'view_user')
+        if logged_in_user.usertype == 'Visitor'
+          redirect_to(:controller => 'dashboard', :action => 'welcome')
           return
         end
       end

@@ -5,7 +5,7 @@ en:
   account_disabled: "Your account has been disabled!"
   actions: "Actions"
   app_title: "Diminut"  
-  cidr: "CIDR"
+  cidr: "Data Center Name"
   change_name: "Change Name"
   change_password: "Change Password"
   create_at: "Created"
@@ -58,7 +58,7 @@ en:
   show: "Show"
   subnets: "Subnets"  
   saved_successfully: "Saved Successfully."
-  sure_to_delete_subnet: "Are you sure you want to delete this subnet?"
+  sure_to_delete_subnet: "Are you sure you want to delete this datacenter?"
   sure_to_delete_user: "Are you sure you want to delete this user?"
   sure_to_delete_server: "Are you sure you want to delete this server?"
   type: "Type"
@@ -77,14 +77,22 @@ en:
   
   activerecord:
     attributes:
+      interface:
+        ip_add: "IP"
       subnet:
         name: "Name"
-        cidr: "CIDR"
+        cidr: "Location"
       user:
         username: "Username"
         name: "Name"
         password: "Password"
-        plain_password: "Password"   
+        plain_password: "Password"
+      interface:
+        pre_dns: "Preferred DNS"
+        def_getaway: "Default Getaway"
+
+      
+      
       entry:
         ip: "IP"
         public_ip: "Public IP"
@@ -107,9 +115,16 @@ en:
               blank: "can not be empty!"
               too_short: "should be at least 4 characters!"
               too_long: "should be at most 25 characters!"
-              invalid: "should be consist of letters, numbers and _ character and no space is allowed."
+              invalid: "  : Cannot contain whitespace"
+            email:
+              blank: "can not be empty!"
+              invalid: "  : Please Enter valid email (example@szar.org)"
+              blank: "can not be empty!"
+            name:
+              blank: "can not be empty!"
             plain_password:
-              too_short: "is too short!"
+              too_short: "should be at least 8 characters!"
+              too_long: "should be at most 25 characters!"
         entry:
           attributes:
             subnet:
@@ -122,10 +137,6 @@ en:
               blank: "can not be empty!"
             serial_number:
               blank: "can not be empty!"
-            ip:
-              blank: "can not be empty!"
-              too_long: "is too long!"
-              invalid: "is invalid!"
             public_ip:
               too_long: "is too long!"
               invalid: "is invalid!"  
@@ -138,3 +149,31 @@ en:
             cidr:
               blank: "can not be empty!"
               invalid: "is invalid! The correct format is something like 10.0.0.0/8"            
+        newdevice:
+          attributes:
+            device_type:
+               blank: "can not be empty"
+        interface:
+          attributes:
+            physical_label:
+               blank: "can not be empty!"
+            ip_add:
+               blank: "can not be empty!"
+               too_long: "is too long!"
+               invalid: "is invalid!"
+            net_mask:
+               blank: "can not be empty!"
+               too_long: "is too long!"
+               invalid: "is invalid!"
+            pre_dns:
+               blank: "can not be empty!"
+               too_long: "is too long!"
+               invalid: "is invalid!"
+            alter_dns:
+               blank: "can not be empty!"
+               too_long: "is too long!"
+               invalid: "is invalid!"
+            def_getaway:
+               blank: "can not be empty!"
+               too_long: "is too long!"
+               invalid: "is invalid!"

@@ -3,14 +3,6 @@
     <td class="caption"><label for="name"><%= f.label("Type") %>:</label></td>
     <td class="data"> <%= f.text_field(:device_type, :maxlength => 255, :size => 30, :placeholder=>'Ex: Server')  %> </td>
   </tr>
-
-  <tr>
-    <td class="col-md-2"><label for="name"><%= f.label("Device name") %>:</label></td>
-    <td class="col-md-2"> <%= f.check_box(:device_name,  :vis=>'true')  %> </td>
-
-    <td class="col-md-2"><label for="name"><%= f.label("Host name") %>:</label></td>
-    <td class="col-md-2"> <%= f.check_box(:host_name,  :vis=>'true')  %> </td>
-  </tr>
   <tr>
     <td class="caption"><label for="name"><%= f.label("Platform") %>:</label></td>
     <td class="data"> <%= f.check_box(:platform,  :vis=>'true')  %> </td>

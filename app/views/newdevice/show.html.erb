@@ -108,18 +108,18 @@
       </td>
     </tr>
     <tr>
-      <td class="title"><%= "Create at  " %>:</td>
-      <td><%= @newdevice.created_at.to_s(:long) %></td>
+      <td class="title"><%= "Create at  " %></td>
+      <td><%= @newdevice.created_at.to_s(:long) %><font color="red">by</font><%= @newdevice.author%></td>
     </tr>
     <tr>
-      <td class="title"><%= "Update at  " %>:</td>
-      <td><%= @newdevice.updated_at.to_s(:long) %></td>
+    <td class="title"><%= "Update at  " %></td>
+    <%if @newdevice.update_author == nil%>
+        <td>----</td>
+        <%else%>
+            <td><%= @newdevice.updated_at.to_s(:long) %><font color="red">by</font><%= @newdevice.update_author%></td>
+       <%end%>
     </tr>
-    <tr>
-      <td class="title"><%= "Create by "%>:</td>
-      <td><%= @newdevice.author.name.length > 0 ? @newdevice.author.name : @newdevice.author.username %></td>
-    </tr>
-    </table>
+      </table>
   </br>
     <tr>
       <td class="buttons" colspan="2">

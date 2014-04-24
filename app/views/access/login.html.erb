@@ -1,5 +1,6 @@
 <% @page_title = t(:login) %>
 
+
 <div class="pageTitle"></div>
 
 <!--[if lt IE 7]>
@@ -13,13 +14,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#"><FONT COLOR="#20b2aa">CNAM</FONT></a>
+
     </div>
 
 
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-
+        <li><%= link_to("DAM",:controller => 'about', :action => 'welcome') %></li>
         <li><%= link_to("about",:controller => 'about', :action => 'about') %></li>
         <li><a href=http://szar.org/v2/contactus.html>Contact</a></li>
 

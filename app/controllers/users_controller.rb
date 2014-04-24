@@ -83,6 +83,7 @@ class UsersController < ApplicationController
 
   def change_password
     # display the form
+    @user = recheck_logged_in_user
     render :layout => nil
 
   end
@@ -90,6 +91,8 @@ class UsersController < ApplicationController
 
 
   def update_password
+
+    @user = recheck_logged_in_user
     old_password = params[:old_password]
     new_password = params[:new_password]
     confirm_password = params[:confirm_password]
@@ -117,14 +120,35 @@ class UsersController < ApplicationController
         end
       end
     end
+    if logged_in_user.usertype=='Technical'
+      redirect_to(:controller => 'subnets', :action => 'list')
+      return
+    end
+    if logged_in_user.usertype == 'Administrator'
+      redirect_to(:controller => 'users', :action => 'list')
+      return
+    end
 
-    redirect_to(:controller=>'users',:action => 'list')
+    if logged_in_user.usertype == 'Visitor'
+      redirect_to(:controller => 'subnets', :action => 'view_user')
+      return
+    end
+    #redirect_to("/")
+  end
+  def show
+    if params[:id] == nil
+      redirect_to('/')
+    else
+      @user = User.find(params[:id])
+    end
   end
 
   def create
     @user = User.new(params[:user])
-    @user.salt = Security.generate_salt    
-    if is_editor      
+    @user.salt = Security.generate_salt
+    user = recheck_logged_in_user
+    if is_editor
+      @user.author = user.username
       if @user.save
         flash[:info] = t(:saved_successfully)
         redirect_to(:action => 'list')
@@ -139,10 +163,13 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+    user = recheck_logged_in_user
     if is_editor
+      @user.update_author = user.username
       if @user.update_attributes(params[:user])
         flash[:info] = t(:saved_successfully)
         redirect_to(:action => 'list')
+
       else
         render('edit')
       end

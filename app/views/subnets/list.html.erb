@@ -51,8 +51,7 @@
       <td class="title"><%= "Location" %></td>
       <td class="title"><%= t :description %></td>      
       <td class="title"><%= t :create_at %></td>
-      <td class="title"><%= t :update_at %></td>
-      <td class="title"><%= t :create_by %></td>
+      <td class="title"><%= "Last Updated" %></td>
       <td class="title"><%= t :actions %></td>
     </tr>
     <% index = 0 %>
@@ -64,9 +63,12 @@
       <td><%= subnet.name %></td>
       <td><%= subnet.cidr %></td>
       <td><%= subnet.description %></td>      
-      <td><%= subnet.created_at.to_s(:short) %></td>
-      <td><%= subnet.updated_at.to_s(:short) %></td>
-      <td><%= subnet.author.name.length > 0 ? subnet.author.name : subnet.author.username %></td>
+      <td><%= subnet.created_at.to_s(:short) %><font color="red"><%="   by  " %></font><%= subnet.author %></td>
+      <%if subnet.update_author == nil%>
+          <td>----</td>
+      <%else%>
+          <td><%= subnet.updated_at.to_s(:long) %><font color="red"><%="   by  " %></font><%= subnet.update_author %></td>
+      <%end%>
       <td class="alert-danger">
         <%= link_to(t(:List), {:controller => 'device', :action => 'list', :id => subnet.id}) %>
         |

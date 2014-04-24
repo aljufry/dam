@@ -1,0 +1,60 @@
+<%# Copyright (c) 2010 Allard Consulting. All Rights Reserved. %>
+<% @page_title = t(:dashboard) %>
+
+<div class="pageTitle"></div>
+
+<!--[if lt IE 7]>
+<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+<![endif]-->
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+    </div>
+DAM
+
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+       
+            <li><%= link_to("Home",:controller => 'access', :action => 'login') %></li>
+
+        <li><%= link_to("about",:controller => 'about', :action => 'welcome') %></li>
+        <%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype == "Visitor" %>
+            <li><%= link_to("Home",:controller => 'subnets', :action => 'view_user') %></li>
+            <li><%= link_to("about",:controller => 'about', :action => 'about') %></li>
+        <%end%>
+        <%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype == "Administrator" %>
+            <li><%= link_to("Home",:controller => 'users', :action => 'list') %></li>
+            <li><%= link_to("about",:controller => 'about', :action => 'about') %></li>
+        <%end%>
+        <%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype == "Technical" %>
+            <li><%= link_to("Home",:controller => 'subnets', :action => 'list') %></li>
+            <li><%= link_to("about",:controller => 'about', :action => 'about') %></li>
+        <%end%>
+        <li><a href=http://szar.org/v2/contactus.html>Contact</a></li>
+
+      </ul>
+
+
+
+
+    </div><!--/.navbar-collapse -->
+
+  </div>
+</div>
+<div class="row-fluid" style="margin-top: 20px;">
+  <img border="0" src="/assets/szar-full.png" align="left" width="170" height="80" >
+  <img border="0" src="/assets/Logo.JPG"  align="right" width="170" height="100" ></br></br></br></br></br>
+  <div class="span6">
+    <%= render :partial => 'support' %>
+  </div>
+  <div class="span6">
+    <%= render :partial => 'legend' %>
+  </div>
+</div>
+

@@ -1,14 +1,9 @@
 <table table class="table table-hover">
   <tr >
-    <td class="caption"><label for="name"><%= f.label("Device Name") %>:</label></td>
-    <td class="data"> <%= f.text_field(:device_name, :maxlength => 255, :size => 30)  %> </td>
-  </tr>
-  <%if @devicetype.host_name%>
-      <tr >
-    <td class="caption"><label for="name"><%= f.label("Hostname") %>:</label></td>
+    <td class="caption"><label for="name"><%= f.label("Host Name") %>:</label></td>
     <td class="data"> <%= f.text_field(:host_name, :maxlength => 255, :size => 30)  %> </td>
   </tr>
-      <%end%>
+
   <%if  @devicetype.operating_system%>
       <tr>
         <td class="caption"><label for="name"><%= f.label("Operation System ") %>:</label></td>

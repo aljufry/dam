@@ -4,11 +4,11 @@ class Entry < ActiveRecord::Base
 
   attr_accessible :device_name,:device_type, :model, :operating_system, :serial_number,
   :warranty, :location, :segment, :application, :username,
-  :password,:interface_type, :vendor, :remarks, :platform, :host_name
+  :password,:interface_type, :vendor, :remarks, :platform, :host_name, :update_author,:author
 
   has_many  :connections
   has_many :interfaces
-  belongs_to :author, :class_name => "User", :foreign_key => "user_id"
+  #belongs_to :author, :class_name => "User", :foreign_key => "user_id"
   belongs_to :subnet
   #has_and_belongs_to :tags
 
@@ -17,13 +17,13 @@ class Entry < ActiveRecord::Base
   #
   #validates_presence_of :device_name
   #validates_length_of  :device_name, :maximum => 255
-  #
+  ##
   #validates_presence_of :model
   #validates_length_of  :model, :maximum => 255
-  #
+  ##
   #validates_presence_of :operating_system
   #validates_length_of  :operating_system, :maximum => 100
-  #
+  ##
   #validates_presence_of :serial_number
   #validates_length_of  :serial_number, :maximum => 255
 

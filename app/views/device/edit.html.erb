@@ -21,7 +21,7 @@
       <%= render(:partial => "formEdit", :locals => {:f => f}) %>
   <% end %>
 
-<%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype == "End_user" %>
+<%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype == "Visitor" %>
 <div class="Third_links">
   <br>
   <%= link_to("Back",{:controller => 'subnets', :action => 'view_user'}, :class => 'btn btn-info')%>

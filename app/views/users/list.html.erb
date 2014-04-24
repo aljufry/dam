@@ -11,7 +11,7 @@
 			<td class="title"><%= t :name %></td>
 			<td class="title"><%= t :type %></td>
 			<td class="title"><%= t :create_at %></td>
-			<td class="title"><%= t :update_at %></td>			
+			<td class="title"><%= "Last Updated" %></td>
 			<td class="title"><%= t :actions %></td>
 		</tr>
 		<% index = 0 %>
@@ -23,10 +23,17 @@
 			<td><%= user.username %></td>
 			<td><%= user.name %></td>
 			<td><%= user.usertype %></td>
-			<td><%= user.created_at.to_s(:short) %></td>
-			<td><%= user.updated_at.to_s(:short) %></td>			
-			<td class="actions">				
-				<%= link_to(t(:edit), {:action => 'edit', :id => user.id}) %>
+			<td><%= user.created_at.to_s(:short) %><font color="red"><%="   by  " %></font><%= user.author %></td>
+			<%if user.update_author == nil%>
+              <td>----</td>
+              <%else%>
+                 <td><%= user.updated_at.to_s(:short) %><font color="red"><%="   by  " %></font><%= user.update_author %></td>
+              <%end%>
+
+			<td class="actions">
+                <%= link_to("info", {:action => 'show', :id => user.id}) %>
+                |
+                <%= link_to(t(:edit), {:action => 'edit', :id => user.id}) %>
 				|
 				<%= link_to(t(:reset_password), {:action => 'reset_password', :id => user.id}) %>
 				|

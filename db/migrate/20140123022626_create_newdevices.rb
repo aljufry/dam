@@ -1,7 +1,7 @@
 class CreateNewdevices < ActiveRecord::Migration
   def up
     create_table :newdevices do |t|
-      t.references :user, :null => false
+      #t.references :user, :null => false
       t.string "device_type"
       t.boolean "device_name"
       t.boolean "host_name"
@@ -16,6 +16,8 @@ class CreateNewdevices < ActiveRecord::Migration
       t.boolean "username"
       t.boolean "password"
       t.boolean "remarks"
+      t.string "author",:limit=>30
+      t.string "update_author",:limit=>30
       t.timestamps
     end
   end

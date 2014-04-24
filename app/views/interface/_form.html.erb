@@ -1,6 +1,6 @@
 <table class="table">
   <tr>
-    <td class="caption"><label for="name"><%= f.label("Physical Label") %>:</label></td>
+    <td class="caption"><label for="name"> Physical.Label: </label></td>
     <td class="data"> <%= f.text_field(:physical_label, :maxlength => 100, :size => 30)  %> </td>
   </tr>
   <tr>
@@ -17,8 +17,16 @@
   </tr>
 
   <tr>
-    <td class="caption"><label for="name"><%= f.label("DNS") %>:</label></td>
-    <td class="data"> <%= f.text_field(:dns, :maxlength => 100, :size => 30)  %> </td>
+    <td class="caption"><label for="name"><%= f.label("Default.Getaway") %>:</label></td>
+    <td class="data"> <%= f.text_field(:def_getaway, :maxlength => 100, :size => 30)  %> </td>
+  </tr>
+  <tr>
+    <td class="caption"><label for="name"><%= f.label("preferred DNS") %>:</label></td>
+    <td class="data"> <%= f.text_field(:pre_dns, :maxlength => 100, :size => 30)  %> </td>
+  </tr>
+  <tr>
+    <td class="caption"><label for="name"><%= f.label("Alter DNS") %>:</label></td>
+    <td class="data"> <%= f.text_field(:alter_dns, :maxlength => 100, :size => 30)  %> </td>
   </tr>
   <tr>
     <td class="caption"><label for="name"><%= f.label("HW Address") %>:</label></td>

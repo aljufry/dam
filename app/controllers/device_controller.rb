@@ -8,6 +8,18 @@ class DeviceController < ApplicationController
   end
 
   def show
+
+    #require 'snmp'
+    #SNMP::Manager.open(:host => '127.0.0.1') do |manager|
+    #
+    #  response = manager.get(["sysDescr.0", "sysName.0"])
+    #  response.each_varbind do |vb|
+    #    @get_request=vb
+    #    puts "GetRequesttttttttttttttttttttttttttttttttttttttt"
+    #    puts "#{vb.name.to_s}  #{vb.value.to_s}  #{vb.value.asn1_type}"
+    #    puts "GetRequesttttttttttttttttttttttttttttttttttttttt"
+    #  end
+    #end
     #@newdevices = Newdevice.all
 
     if params[:id] == nil
@@ -77,7 +89,7 @@ class DeviceController < ApplicationController
     subnet = @device.subnet
     user = recheck_logged_in_user
     if is_editor
-      @device.author = user
+      @device.update_author = user.username
       if @device.update_attributes(params[:device])
         flash[:info] = t(:saved_successfully)
         redirect_to(:action => 'list', :id => subnet.id)
@@ -113,7 +125,7 @@ class DeviceController < ApplicationController
     @device = Entry.new(params[:entry])
     user = recheck_logged_in_user
     if is_editor
-      @device.author = user
+      @device.author = user.username
       @device.subnet = @subnet
       if @device.save
         flash[:info] = t(:saved_successfully)
@@ -153,6 +165,20 @@ class DeviceController < ApplicationController
   #    flash[:notice] = t(:you_do_not_have_edit_privilege)
   #    render('delete')
   #  end
+  end
+
+  def getrequest
+    require 'snmp'
+    SNMP::Manager.open(:host => '127.0.0.1') do |manager|
+
+      response = manager.get(["sysDescr.0", "sysName.0"])
+      response.each_varbind do |vb|
+        @get_request=vb
+        puts "GetRequesttttttttttttttttttttttttttttttttttttttt"
+        puts "#{vb.name.to_s}  #{vb.value.to_s}  #{vb.value.asn1_type}"
+        puts "GetRequesttttttttttttttttttttttttttttttttttttttt"
+      end
+    end
   end
 
 end

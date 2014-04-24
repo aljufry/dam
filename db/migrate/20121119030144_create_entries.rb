@@ -1,7 +1,7 @@
 class CreateEntries < ActiveRecord::Migration
   def change
     create_table :entries do |t|
-      t.references :user, :null => false
+      #t.references :user, :null => false
       t.references :subnet, :null => false
       t.string "device_name", :limit => 255
       t.string "host_name", :limit => 255
@@ -17,6 +17,8 @@ class CreateEntries < ActiveRecord::Migration
       t.string "username", :limit => 255
       t.string "password", :limit => 255
       t.text "remarks"
+      t.string "author",:limit=>30
+      t.string "update_author",:limit=>30
      t.timestamps
     end
   end
