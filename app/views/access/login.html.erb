@@ -16,31 +16,26 @@
       </button>
 
     </div>
-
-
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li><%= link_to("DAM",:controller => 'about', :action => 'welcome') %></li>
-        <li><%= link_to("about",:controller => 'about', :action => 'about') %></li>
+        <li><%= link_to("DAM",:controller => 'access', :action => 'welcome') %></li>
+        <li><%= link_to("About",:controller =>'access', :action => 'about') %></li>
         <li><a href=http://szar.org/v2/contactus.html>Contact</a></li>
-
       </ul>
-
-
         <%= form_tag({:action => 'do_login'},  {:class=> 'navbar-form navbar-right'}) do %>
             <div class="form-group">
-              <!--<input type="text" placeholder="User name" class="form-control">-->
+
               <%= text_field_tag(:username,nil, :class => 'form-control', :placeholder=> 'Username') %>
             </div>
             <div class="form-group">
-              <!--<input type="password" placeholder="Password" class="form-control">-->
+
               <%= password_field_tag(:password,nil, :class=> 'form-control',:placeholder=> 'Password') %>
             </div>
-            <!--<button type="submit" class="btn btn-success">Login</button>-->
+
           <button type="submit" class="btn btn-success">Sign in</button>
         <%end%>
 
-      </div><!--/.navbar-collapse -->
+      </div>
 
   </div>
 </div>

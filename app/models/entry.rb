@@ -4,10 +4,12 @@ class Entry < ActiveRecord::Base
 
   attr_accessible :device_name,:device_type, :model, :operating_system, :serial_number,
   :warranty, :location, :segment, :application, :username,
-  :password,:interface_type, :vendor, :remarks, :platform, :host_name, :update_author,:author
+  :password,:interface_type, :vendor, :remarks, :platform, :host_name, :update_author,:author, :cpuMib, :ramMib
 
   has_many  :connections
+  has_many :monitorings
   has_many :interfaces
+  has_many :logs
   #belongs_to :author, :class_name => "User", :foreign_key => "user_id"
   belongs_to :subnet
   #has_and_belongs_to :tags
@@ -34,7 +36,6 @@ class Entry < ActiveRecord::Base
   #            :allow_blank => true,
   #            :with => /^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])){3}$/
   #          }
-
   #validates :public_ip,
   #          :length => {:maximum => 15},
   #          :format => {
@@ -43,7 +44,7 @@ class Entry < ActiveRecord::Base
   #          }
 
 
-  #validate :warranty_is_valid_date
+  validate :warranty_is_valid_date
 
   before_save :encrypt_username_password
   after_save :decrypt_username_password

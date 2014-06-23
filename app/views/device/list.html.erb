@@ -12,7 +12,7 @@
 
           <th class="title"><%= "#" %></th>
           <th class="title"><%= "Type" %></th>
-          <th class="title"><%= "Device Name" %></th>
+          <th class="title"><%= "Host Name" %></th>
           <th class="title" style="text-align: center"><%= "Interface" %></th>
           <th class="title"><%= "Created"%></th>
           <th class="title"><%= "Last Updated" %></th>
@@ -28,7 +28,7 @@
             <tr class='<%= class_name %>'>
               <td class="index"><%= index %></td>
               <td><%= device.device_type %></td>
-              <td><%= device.device_name %></td>
+              <td><%= device.host_name %></td>
               <!--"********************************"-->
               <td>
                 <UL class="network_tree" >
@@ -70,7 +70,7 @@
                                      <td class="alert-danger">
                                        <%= link_to image_tag("/assets/edit.png",:border=>0,:width => 20, :height => 20), {:controller => 'interface',:action => 'edit', :id => interface.id},{:class=>'btn-delete'}%>
                                        <%= link_to image_tag("/assets/delete2.png",:border=>0,:width => 20, :height => 20), {:controller => 'interface',:action => 'delete', :id => interface.id}, {:class=> 'btn-delete'}%>
-                                       <%= link_to(t("info"),{:controller => 'interface',:action => 'show', :id => interface.id}, {:class=> 'btn-delete'}) %>
+                                       <%= link_to(t("info"),{:controller => 'interface',:action => 'show', :id => interface.id})%> <!-- {:class=> 'btn-delete'}) %>-->
 
 
                                      </td>
@@ -94,7 +94,7 @@
 
               <td>
                 <body link=RED>
-              <%= link_to(t(:show), {:action => 'show', :id => device.id}) %>
+              <%= link_to("Monitor", {:action => 'show', :id => device.id}) %>
               |
               <%= link_to("Delete", {:action => 'delete', :id => device.id}, {:class=> 'btn-delete'}) %>
 

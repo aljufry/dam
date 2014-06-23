@@ -19,14 +19,14 @@
 
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li><%= link_to("DAM",:controller => 'about', :action => 'welcome') %></li>
-        <%if  session[:user_id]==nil %>
+
         <li><%= link_to("Home",:controller => 'access', :action => 'login') %></li>
-        <%end%>
+
+        <li><%= link_to("about",:controller => 'about', :action => 'welcome') %></li>
         <%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype == "Visitor" %>
-        <li><%= link_to("Home",:controller => 'subnets', :action => 'view_user') %></li>
-        <li><%= link_to("about",:controller => 'about', :action => 'about') %></li>
-       <%end%>
+            <li><%= link_to("Home",:controller => 'subnets', :action => 'view_user') %></li>
+            <li><%= link_to("about",:controller => 'about', :action => 'about') %></li>
+        <%end%>
         <%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype == "Administrator" %>
             <li><%= link_to("Home",:controller => 'users', :action => 'list') %></li>
             <li><%= link_to("about",:controller => 'about', :action => 'about') %></li>
@@ -36,7 +36,7 @@
             <li><%= link_to("about",:controller => 'about', :action => 'about') %></li>
         <%end%>
         <li><a href=http://szar.org/v2/contactus.html>Contact</a></li>
-        
+
       </ul>
 
 
@@ -47,73 +47,14 @@
   </div>
 </div>
 
-<img border="0" src="/assets/szar-full.png" align="left" width="170" height="100" >
-<img border="0" src="/assets/Logo.JPG"  align="right" width="170" height="100" ></br></br></br></br></br>
-
-
-
-<div class="jumbotron" >
-
-
-
-    <p style="color: #ff0000">The Company</p>
-    </br>
-  <p align="justify" style="color: #ffffff">
-
-    Szar Solutions Sdn. Bhd. was established to bridge the gap between the Open Source Community and the fast growing Information Communication Technology (ICT) industry. It is a privately held company that strives to be the industry's leading entity which provides businesses with reliable services and products.
-
-    </br></br>We serve organizations and enterprises to increase their competitive advantage and effectiveness through innovative technological enhancements. We offer customers expertise in improving their services by tapping its resources.
-
-    </br></br>Szar Solutions' team of experienced experts are well exposed to the ICT terrain, and hence provide reliable and executable solutions. They consist of well qualified professionals from computer science and hardware engineering backgrounds to offer customers critical technology knowledge and know how.
-
-    </br></br>Being open source advocates, we strives to hold to another key concept : open minds that are well informed, thus embracing our motto, .Open Source.Open Minds.
-
-    </br></br>
-  </p>
-  <p style="color: #ff0000">The Scope</p>
-  <p align="justify" style="color: #ffffff">
-    </br>DAM enables users to manage the computer and network assets. The users shall be entering to the system by specific type of user. The system has ability to the collecting the data based on user requests. The different type of user shall be decelerating by admin user as well as modifying their informations.
-    The network administrator shall be able to monitoring the servers inside the network and modifying the equipment. The end technical user with the limit accessibility shall be able to view overall of the equipment inside the specific network.
-
-  </p>
-
+<div class="row-fluid" style="margin-top: 20px;">
+  <img border="0" src="/assets/transEmgraft.png" align="left" width="170" height="80" >
+  <img border="0" src="/assets/Logo.JPG"  align="right" width="170" height="100" ></br></br></br></br></br>
+  <div class="span6">
+    <%= render :partial => 'support' %>
+  </div>
+  <div class="span6">
+    <%= render :partial => 'legend' %>
+  </div>
 </div>
-
-<script type="text/javascript">
-    var username = $('#username');
-    if (username != undefined && username != null) {
-        username.focus();
-    }
-
-</script>
-
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

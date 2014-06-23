@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140306073155) do
+ActiveRecord::Schema.define(:version => 20140526071613) do
 
   create_table "agents", :force => true do |t|
     t.string   "ip_address"
@@ -48,6 +48,8 @@ ActiveRecord::Schema.define(:version => 20140306073155) do
     t.string   "update_author",    :limit => 30
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
+    t.string   "ramMib"
+    t.string   "cpuMib"
   end
 
   create_table "interfaces", :force => true do |t|
@@ -75,6 +77,22 @@ ActiveRecord::Schema.define(:version => 20140306073155) do
     t.text     "remarks"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+  end
+
+  create_table "logs", :force => true do |t|
+    t.integer  "entry_id",   :null => false
+    t.integer  "cpu_war"
+    t.integer  "ram_war"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "monitorings", :force => true do |t|
+    t.integer  "entry_id",   :null => false
+    t.integer  "cpu_uti"
+    t.integer  "ram_uti"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "newdevices", :force => true do |t|

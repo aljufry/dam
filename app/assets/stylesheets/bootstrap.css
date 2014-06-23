@@ -31,6 +31,8 @@ video {
   display: inline-block;
 }
 
+
+
 audio:not([controls]) {
   display: none;
   height: 0;
@@ -210,7 +212,7 @@ textarea {
 
 table {
   border-collapse: collapse;
-  border-spacing: 0;
+  border-spacing: 1;
 }
 
 @media print {
@@ -729,6 +731,26 @@ pre {
 
 pre.prettyprint {
   margin-bottom: 20px;
+}
+.monitoring-realtime{
+    position: relative;
+    float: right;
+    margin-top: 50px;
+    width: 50%;
+    height: 350px;
+    background-color: lightsteelblue;
+    margin-bottom: 10px;
+    font-family:"Times New Roman",bold 12px/30px,Georgia,Serif;
+}
+.monitoring-static {
+    position: relative;
+    float: left;
+    margin-top: 50px;
+    width: 50%;
+    height: 350px;
+    background-color:white ;
+    margin-bottom: 10px;
+    font-family:"Times New Roman",bold 12px/30px,Georgia,Serif;
 }
 
 pre code {
@@ -5394,11 +5416,18 @@ a.list-group-item:focus {
 }
 
 .panel-footer {
-  padding: 10px 15px;
-  background-color: #f5f5f5;
-  border-top: 1px solid #dddddd;
-  border-bottom-right-radius: 3px;
-  border-bottom-left-radius: 3px;
+  /*padding: 10px 15px;*/
+  /*background-color: #f5f5f5;*/
+  /*border-top: 1px solid #dddddd;*/
+  /*border-bottom-right-radius: 3px;*/
+  /*border-bottom-left-radius: 3px;*/
+    clear: both;
+    position: relative;
+    bottom: -140px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    height: 75px;
+    background-color: #ffffff;
 }
 
 .panel-group .panel {
@@ -5519,6 +5548,7 @@ a.list-group-item:focus {
 
 .panel-info {
   border-color: #bce8f1;
+
 }
 
 .panel-info > .panel-heading {
@@ -5874,6 +5904,10 @@ body.modal-open,
   background-clip: padding-box;
 }
 
+#white-back{
+    background: #ffffff;
+    text-align: center;
+}
 .popover.top {
   margin-top: -10px;
 }
@@ -6803,4 +6837,11 @@ td.visible-print {
     display: none !important;
   }
 
+    .moni {
+        background-color:#008800;
+    }
+
+#timerForDiv{
+
+}
 }

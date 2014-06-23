@@ -15,7 +15,7 @@ development:
   database: diminut_development
   pool: 5
   username: root
-  password: "123456"
+  password: "zaq12wsx!"
   socket: /var/lib/mysql/mysql.sock
         
 
@@ -29,7 +29,7 @@ test:
   database: diminut_test
   pool: 5
   username: root
-  password: "123456"
+  password: "zaq12wsx!"
 
   socket: /var/lib/mysql/mysql.sock
 
@@ -40,5 +40,5 @@ production:
   database: diminut_production
   pool: 5
   username: root
-  password: "123456"
+  password: "zaq12wsx!"
   socket: /var/lib/mysql/mysql.sock

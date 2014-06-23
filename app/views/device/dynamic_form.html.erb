@@ -1,21 +1,14 @@
-	<%= form_for(@entry, :url => {:action => 'create', :id => @subnet.id}) do |f| %>
+<%= form_for(@entry, :url => {:action => 'create', :id => @subnet.id}) do |f| %>
 
-          <table class="table table-hover">
-
-
-
+  <table class="table table-hover">
 	<tr>
   <td class="caption"><label for="name"><%= f.label("Device Type:") %>:</label></td>
   <td class="data"> <%= f.select(:device_type,options_for_select(@newdevices.map{|v| [v.device_type,v.device_type]},:selected =>params[:device_type_id]) )  %> </td>
     </tr>
-
-
-
   <tr>
     <td class="caption"><label for="name"><%= f.label("Hostname") %>:</label></td>
     <td class="data"> <%= f.text_field(:host_name, :maxlength => 255, :size => 30)  %> </td>
   </tr>
-
 
   <%if @devicetype.model%>
 	<tr>
@@ -33,7 +26,7 @@
   <%if @devicetype.platform%>
       <tr>
         <td class="caption"><label for="name"><%= f.label("Platform") %>:</label></td>
-        <td class="data"> <%= f.select(:platform, options_for_select(["x64-bit","x32-bit"]))  %> </td>
+        <td class="data"> <%= f.select(:platform, options_for_select(["unspecify","x64-bit","x32-bit"]))  %> </td>
       </tr>
   <%end%>
 	<%if @devicetype.serial_number%>
@@ -57,7 +50,7 @@
 	<%end%>
 	<%if @devicetype.segment%>
 	<tr>
-		<td class="caption"><label for="name"><%= f.label(:segment) %>:</label></td>
+		<td class="caption"><label for="name"><%= f.label("Function Description") %>:</label></td>
 		<td class="data"> <%= f.text_field(:segment, :maxlength => 100, :size => 30)  %> </td>
 	</tr>
 	<%end%>
@@ -96,7 +89,28 @@
 	
 </table>
 
+
+<div>
+  <table>
+    <tr>
+      <td style="text-align: center"><h3>OID</h3></td>
+    </tr>
+    <tr>
+      <td class="caption"><label for="CPU OID"><%= f.label("CPU Raw Idle") %>:</label></td>
+      <td class="data"> <%= f.text_field(:cpuMib, :maxlength => 100, :size => 30)  %> </td>
+    </tr>
+    <tr>
+      <td class="caption"><label for="RAM OID"><%= f.label("Memory Total Real") %>:</label></td>
+      <td class="data"> <%= f.text_field(:ramMib, :maxlength => 100, :size => 30)  %> </td>
+    </tr>
+  </table>
+</div>
+
 <%end%>
+
+
+
+
 <script type="text/javascript">
 		var input = $("#device_device_name");
 	if (input != null && input != undefined) {
@@ -112,7 +126,4 @@ $(function()
 
     });
 });
-	
-	
-
 </script>

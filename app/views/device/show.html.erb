@@ -1,127 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="/assets/bootstrap.css">
+</head>
+<body onload="JavaScript:timedRefresh(60000);">
+<div>
+  <div>
+    <%if @device.cpuMib=="" && @device.ramMib==""%>
+        <%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype != "Visitor" %>
+        <div class="alert alert-info">
+          <img border="0" src="/assets/notification.png" align="left" width="40" height="40" >
+          <h4> <font color="black"> <%="To show CPU and RAM utilization please enter your device's MIB by"%></font>
+            <%= link_to("editing", {:action => 'edit', :id => @device.id})%>
+            <font color="black"> <%="the device properties"%></font>
+          </h4>
+        </div>
 
-  <table class="table table-hover">
-    <tr>
-      <td>
-      <td>
-    </tr>
-    <tr>
-      <td class="title"><font color="orange"><%= "Device Type" %></font></td>
-      <td><%= @device.device_type%></td>
-    </tr>
-    <tr>
-      <td class="title"><font color="orange"><%= "Device Name" %></font></td>
-      <td><%= @device.device_name%></td>
-    </tr>
-    <%if @devicetype.model%>
-        <tr>
-          <td class="title"><font color="orange"><%= t :model %></font></td>
-          <td><%= @device.model %></td>
-        </tr>
-    <%end%>
-    <%if @devicetype.serial_number%>
-        <tr>
-          <td class="title"><font color="orange"><%= t :serial_number %></font></td>
-          <td><%= @device.serial_number %></td>
-        </tr>
-    <%end%>
-    <%if  @devicetype.operating_system%>
-        <tr>
-          <td class="title"><font color="orange"><%= t :operating_system %></font></td>
-          <td><%= @device.operating_system %></td>
-        </tr>
-    <%end%>
-    <%if  @devicetype.username%>
-        <tr>
-          <td class="title"><font color="orange"><%= t :username %></font></td>
-          <td><%= @device.username %></td>
-        </tr>
-    <%end%>
-    <%if  @devicetype.password%>
-        <tr>
-          <td class="title"><font color="orange"><%= t :password %></font></td>
-          <td><span id="password"><%= @device.password %></span></td>
-        </tr>
-        <tr>
-    <%end%>
-    <%if  @devicetype.warranty%>
-        <td class="title"><font color="orange"><%= t :warranty %></font></td>
-        <td><%= @device.warranty != nil ? @device.warranty.to_s(:long) : '' %></td>
-        </tr>
-    <%end%>
-    <%if  @devicetype.location%>
-        <tr>
-          <td class="title"><font color="orange"><%= t :location %></font></td>
-          <td><%= @device.location %></td>
-        </tr>
-    <%end%>
-    <%if  @devicetype.segment%>
-        <tr>
-          <td class="title"><font color="orange"><%= t :segment %></font></td>
-          <td><%= @device.segment %></td>
-        </tr>
-    <%end%>
-    <%if @devicetype.application%>
-        <tr>
-          <td class="title"><font color="orange"><%= t :application %></font></td>
-          <td><%= @device.application %></td>
-        </tr>
-    <%end%>
-    <%if @devicetype.remarks%>
-        <tr>
-          <td class="title"><font color="orange"><%= t :remarks %></font></td>
-          <td><%= @device.remarks %></td>
-        </tr>
-    <%end%>
-    <tr>
-      <td class="title"><font color="orange"><%= t :create_at %></font></td>
-      <td><%= @device.created_at.to_s(:long) %><font color="red"><%= "by" %></font><%= @device.author %></td>
-    </tr>
-    <tr>
-      <td class="title"><font color="orange"><%= t :update_at %></font></td>
-      <%if @device.update_author == nil%>
-          <td>----</td>
         <%else%>
-              <td><%= @device.updated_at.to_s(:long) %><font color="red"><%= "by" %></font><%= @device.update_author %></td></td>
+            <div class="alert alert-info">
+              <img border="0" src="/assets/notification.png" align="left" width="40" height="40" >
+              <h4> <font color="black">
+                <%="To show CPU and RAM utilization needs OID"%></font>
+               </h4>
+            </div>
+
         <%end%>
-    </tr>
-
-    <%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype != "Visitor" %>
-        <tr>
-          <td class="buttons" colspan="2">
-            <%= link_to(t("list"), {:action => 'list', :id => @device.subnet.id}, :class => "btn btn-info") %>
-            <%= link_to(t("edit"), {:action => 'edit', :id => @device.id}, :class => "btn btn-warning") %>
-
-          </td>
-        </tr>
+     <%else%>
+        <%=line_chart [{name: "CPU Raw Idle", data: @device.monitorings.group_by_minute("created_at").average(:cpu_uti)}]%>
+        <%=line_chart [{name:"Memory Total Real",data:@device.monitorings.group_by_minute("created_at").average(:ram_uti)}]%>
+        </div>
+        <!-------------------------------Log-------------------------------->
+        <div>
+          <table>
+            <tr>
+              <td>
+                <%if @ary[0] >10%>
+                    <img border="0" src="/assets/warning.png" align="left" width="40" height="40" >
+                    <h4>CPU Utilazation.......<%=@ary[0]%></h4>
+                <%end%>
+                <%if @ary[1] >10%>
+                    <img border="0" src="/assets/warning.png" align="left" width="40" height="40" >
+                    <h4>RAM Utilazation.......<%=@ary[1]%></h4>
+                <%end%>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <!--******************** real time tbale *************************-->
+        <div class="monitoring-realtime">
+          <h2 id="white-back">Real Time Description</h2>
+          <table class="table table-hover">
+            <title>rela time Properti</title>
+            <%# require 'snmp'%>
+            <% SNMP::Manager.open(:host => @device.interfaces.first.ip_add ) do |manager| %>
+                <% response = manager.get(["sysUpTime.0", "sysDescr.0","sysName.0","1.3.6.1.2.1.1.6.0"])%>
+                <% response.each_varbind do |vb|%>
+                    <tr>
+                      <td ><%=vb.value%></td>
+                    </tr>
+                <%end%>
+            <%end%>
+          </table>
+        </div>
+        </div>
     <%end%>
-  </table>
-  <%=@get_request%>
-
-
-
-  <script type="text/javascript">
-
-      $(document).ready(function() {
-          try {
-              $('span#password').css('background-color', 'black');
-              $('span#password').css('border-radius', '3px');
-              $('span#password').css('cursor', 'default');
-
-              $('span#password').mouseenter(function() {
-                  $('span#password').css('background-color', 'transparent');
-              });
-
-              $('span#password').mouseout(function() {
-                  setTimeout("$('span#password').css('background-color', 'black');", 1000);
-              });
-          } catch (e) {
-              console.log(e);
-          }
-      });
-
-
-  </script>
-
+    <!--******************** static table ******************************-->
+    <div class="monitoring-static">
+      <table class="table table-hover">
+        <h2 id="white-back">Static Description</h2>
+        <title>Static Properti</title>
+        <tr>
+          <td>
+          <td>
+        </tr>
+        <tr>
+          <td class="title"><font color="black"><%= "Device Type" %></font></td>
+          <td><%= @device.device_type%></td>
+        </tr>
+        <tr>
+          <td class="title"><font color="black"><%= "Host Name" %></font></td>
+          <td><%= @device.host_name%></td>
+        </tr>
+        <%if @devicetype.model%>
+            <tr>
+              <td class="title"><font color="black"><%= t :model %></font></td>
+              <td><%= @device.model %></td>
+            </tr>
+        <%end%>
+        <%if @devicetype.serial_number%>
+            <tr>
+              <td class="title"><font color="black"><%= t :serial_number %></font></td>
+              <td><%= @device.serial_number %></td>
+            </tr>
+        <%end%>
+        <%if  @devicetype.operating_system%>
+            <tr>
+              <td class="title"><font color="black"><%= t :operating_system %></font></td>
+              <td><%= @device.operating_system %></td>
+            </tr>
+        <%end%>
+        <%if  @devicetype.username%>
+            <tr>
+              <td class="title"><font color="black"><%= t :username %></font></td>
+              <td><%= @device.username %></td>
+            </tr>
+        <%end%>
+        <%if  @devicetype.password%>
+            <tr>
+              <td class="title"><font color="black"><%= t :password %></font></td>
+              <td><span id="password"><%= @device.password %></span></td>
+            </tr>
+            <tr>
+        <%end%>
+        <%if  @devicetype.warranty%>
+            <td class="title"><font color="black"><%= t :warranty %></font></td>
+            <td><%= @device.warranty != nil ? @device.warranty.to_s(:long) : '' %></td>
+            </tr>
+        <%end%>
+        <%if  @devicetype.location%>
+            <tr>
+              <td class="title"><font color="black"><%= t :location %></font></td>
+              <td><%= @device.location %></td>
+            </tr>
+        <%end%>
+        <%if  @devicetype.segment%>
+            <tr>
+              <td class="title"><font color="black"><%="Function Description" %></font></td>
+              <td><%= @device.segment %></td>
+            </tr>
+        <%end%>
+        <%if @devicetype.application%>
+            <tr>
+              <td class="title"><font color="black"><%= t :application %></font></td>
+              <td><%= @device.application %></td>
+            </tr>
+        <%end%>
+        <%if @devicetype.remarks%>
+            <tr>
+              <td class="title"><font color="black"><%= t :remarks %></font></td>
+              <td><%= @device.remarks %></td>
+            </tr>
+        <%end%>
+        <tr>
+          <td class="title"><font color="black"><%= t :create_at %></font></td>
+          <td><%= @device.created_at.to_s(:long) %><font color="red"><%= "by" %></font><%= @device.author %></td>
+        </tr>
+        <tr>
+          <td class="title"><font color="black"><%= t :update_at %></font></td>
+          <%if @device.update_author == nil%>
+              <td>----</td>
+          <%else%>
+              <td><%= @device.updated_at.to_s(:long) %><font color="red"><%= "by" %></font><%= @device.update_author %></td></td>
+          <%end%>
+        </tr>
+      </table>
+    </div>
+    <!--***************************** footer ********************************-->
+    <div class="panel-footer">
+      <table>
+        <%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype != "Visitor" %>
+            <tr>
+              <td class="buttons" colspan="2">
+                <%= link_to(t("list"), {:action => 'list', :id => @device.subnet.id}, :class => "btn btn-info") %>
+                <%= link_to(t("edit"), {:action => 'edit', :id => @device.id}, :class => "btn btn-warning") %>
+              </td>
+            </tr>
+        <%end%>
+      </table>
+    </div>
+    <%=@get_request%>
+    </body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function() {
+        try {
+            $('span#password').css('background-color', 'black');
+            $('span#password').css('border-radius', '3px');
+            $('span#password').css('cursor', 'default');
+            $('span#password').mouseenter(function() {
+                $('span#password').css('background-color', 'transparent');
+            });
+            $('span#password').mouseout(function() {
+                setTimeout("$('span#password').css('background-color', 'black');", 1000);
+            });
+        } catch (e) {
+            console.log(e);
+        }
+    });
+    function timedRefresh(timeoutPeriod) {
+        setTimeout("location.reload(true);",timeoutPeriod);
+    }
+</script>
 <%if  session[:user_id]!=nil && User.find(session[:user_id].to_i).usertype == "Visitor" %>
     <div class="Third_links">
       <br>

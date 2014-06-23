@@ -6,4 +6,8 @@ class Newdevice < ActiveRecord::Base
     #belongs_to :author, :class_name => "User", :foreign_key => "user_id"
 
     validates_presence_of :device_type
+            #:presence => true,
+    validates :device_type, format: { without: /\s/ }           
+
+            
 end
